@@ -13,6 +13,7 @@ body {
   padding: 0;
 }
 
+
 .edgeToEdge {
   background-color: #fff;
   border-spacing: 0;
@@ -21,6 +22,10 @@ body {
   font-weight: bold;
   margin: 0;
   padding: 0;
+}
+
+legend {
+  color: #663;
 }
 
 .edgeToEdge.formButtons {
