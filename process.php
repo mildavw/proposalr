@@ -20,6 +20,7 @@ foreach ($_POST as $key => $value) {
 }
 fclose($fp);
 uploadDocument($gdClient, true, $filename, false);
+unlink($filename);
 
 function uploadDocument($docs, $html, $originalFileName,
                         $temporaryFileLocation) {
