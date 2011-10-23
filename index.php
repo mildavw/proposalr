@@ -34,7 +34,7 @@ function checkbox($var,$label,$prefix) {
 ?>
 
 <body>
-<form mothod="POST" action="process.php">
+<form method="POST" action="process.php">
   <fieldset class="edgeToEdge">
   <legend>Contact Info</legend>
   <dl class="edgeToEdge formFields">
