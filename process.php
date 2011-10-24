@@ -1,56 +1,27 @@
 <?php
 
-require_once 'Zend/Loader.php';
-Zend_Loader::loadClass('Zend_Gdata');
-Zend_Loader::loadClass('Zend_Gdata_AuthSub');
-Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
-Zend_Loader::loadClass('Zend_Gdata_Docs');
+$filename = $_POST['bride_last'] . '-' . $_POST['groom_last'] . '.pdf';
 
-$user = 'mildavw@gmail.com';
-$pass = 'hei9791di';
-$service = Zend_Gdata_Docs::AUTH_SERVICE_NAME;
+require('fpdf.php');
 
-$httpClient = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
-$gdClient = new Zend_Gdata_Docs($httpClient);
+class PDF extends FPDF {
+  // Page footer
+  function Footer() {
+    $this->SetY(-45);
+    $this->MultiCell(200,80,"EJP Events\n2808 NE Martin Luther King Blvd, Ste 3",0,'L');
 
-$filename = $_POST['bride_last'] . '-' . $_POST['groom_last'] . '.csv';
-$fp = fopen($filename, 'w');
-foreach ($_POST as $key => $value) {
-    fputcsv($fp, array($key, $value));
-}
-fclose($fp);
-uploadDocument($gdClient, true, $filename, false);
-unlink($filename);
-
-function uploadDocument($docs, $html, $originalFileName,
-                        $temporaryFileLocation) {
-  $fileToUpload = $originalFileName;
-  if ($temporaryFileLocation) {
-    $fileToUpload = $temporaryFileLocation;
+    $this->SetY(-15);
+    $this->SetFont('Arial','I',8);
+    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'R');
   }
-
-  // Upload the file and convert it into a Google Document. The original
-  // file name is used as the title of the document and the mime type
-  // is determined based on the extension on the original file name.
-  $newDocumentEntry = $docs->uploadFile($fileToUpload, $originalFileName,
-      null, Zend_Gdata_Docs::DOCUMENTS_LIST_FEED_URI);
-
-  echo "New Document: ";
-
-  if ($html) {
-      // Find the URL of the HTML view of this document.
-      $alternateLink = '';
-      foreach ($newDocumentEntry->link as $link) {
-          if ($link->getRel() === 'alternate') {
-              $alternateLink = $link->getHref();
-          }
-      }
-      // Make the title link to the document on docs.google.com.
-      echo "<a href=\"$alternateLink\">\n";
-  }
-  echo $newDocumentEntry->title."\n";
-  if ($html) {echo "</a>\n";}
 }
 
+$pdf = new PDF();
+$pdf->AliasNbPages();
+$pdf->AddPage();
+$pdf->SetFont('Times','',12);
+for($i=1;$i<=40;$i++)
+    $pdf->Cell(0,10,'Printing line number '.$i,0,1);
+$pdf->Output($filename,'D');
 
 ?>
