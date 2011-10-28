@@ -25,8 +25,9 @@ function date_field($var,$label) {
 }
 function checkbox($var,$label,$prefix) {
   echo "<br />";
-  echo "<label for='{$var}'>{$label}</label>";
-  echo "<input type='checkbox' name='{$var}' id='{$var}' value='{$prefix}_{$var}' />";
+  echo "<label for='{$var}'>{$label}";
+  echo "<input type='checkbox' name='{$var}' id='{$var}' value='{$prefix}_{$var}' checked='checked'/>";
+  echo "</label>";
 }
 ?>
 
