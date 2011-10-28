@@ -20,7 +20,19 @@ function openFutureDate(target) {
   SpinningWheel.open();
 }
 
+function add_calculation_buttons() {
+  $('input[name=qrtly_pmt]').parent().append('<button>Calculate</button>');
+  $('input[name=option_date]').parent().append('<button>Calculate</button>');
+  $('input[name=pmt_date_1]').parent().append('<button>Calculate</button>');
+  $('input[name=pmt_date_2]').parent().append('<button>Calculate</button>');
+  $('input[name=pmt_date_3]').parent().append('<button>Calculate</button>');
+}
+
 function calc_payments() {
+  
+}
+
+function calc_dates() {
   
 }
 

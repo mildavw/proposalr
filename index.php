@@ -100,7 +100,7 @@ function checkbox($var,$label,$prefix) {
   </dd>
 
   <dt><label for="avenues">Avenues/Methods</label></dt>
-  <dd><textarea cols="60" rows="10" name="avenues">Suggest avenues and methods that will...</textarea>
+  <dd><textarea cols="60" rows="10" name="avenues">Suggest avenues and methods that will  create/emphasize/ensure INSERT CLIENT’S GOTTA-HAVES HERE.</textarea>
   </dd>
 
   <dt>Will Oversee:</dt>
@@ -121,10 +121,10 @@ function checkbox($var,$label,$prefix) {
     dict_field('flat_fee','Flat Fee:');
     dict_field('due_on_sign','Due Upon Signing:');
     dict_field('qrtly_pmt','Quarterly Payment:');
+    date_field('option_date','Option Date:');
     date_field('pmt_date_1','Payment Date 1:');
     date_field('pmt_date_2','Payment Date 2:');
     date_field('pmt_date_3','Payment Date 3:');
-    date_field('option_date','Option Date:');
   ?>
   </dl>
   </fieldset>
@@ -148,6 +148,8 @@ function checkbox($var,$label,$prefix) {
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="content.js"></script>
 <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
-
+<script type="text/javascript">
+  add_calculation_buttons();
+</script>
 </body>
 </html>
