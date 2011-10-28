@@ -9,10 +9,6 @@
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 
   <link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" />
-  <script type="text/javascript" src="spinningwheel-min.js"></script>
-  <script type="text/javascript" src="main.js"></script>
-  <script type="text/javascript" src="content.js"></script>
-
   </head>
 
   <?php
@@ -35,7 +31,7 @@ function checkbox($var,$label,$prefix) {
 ?>
 
 <body>
-<div id='input' style='display:block'>
+<div id='setup' style='display:block'>
   <fieldset class="edgeToEdge">
   <legend>Contact Info</legend>
   <dl class="edgeToEdge formFields">
@@ -133,21 +129,24 @@ function checkbox($var,$label,$prefix) {
   </fieldset>
 
   <p class="edgeToEdge formButtons">
-    <button onclick='showhide("input");preview();showhide("preview");'>Submit</button>
+    <button onclick='$("#setup").hide();preview();$("#preview").show();'>Submit</button>
   </p>
 </div>
 
 <div id="preview" style="display:none;">
-
   <p class="edgeToEdge formButtons">
-    <button onclick='showhide("input");showhide("preview");'>Submit</button>
+    <button onclick='$("#preview").hide();$("#setup").show();'>Submit</button>
   </p>
 </div>
 
+<div class="footer">
+  Proposalr &copy; EJP Events, 2011
+</div>
 
-  <div class="footer">
-    Proposalr &copy; EJP Events, 2011
-  </div>
+<script type="text/javascript" src="spinningwheel-min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="content.js"></script>
+<script type="text/javascript" src="jquery-1.6.4.min.js"></script>
 
 </body>
 </html>
