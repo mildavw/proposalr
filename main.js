@@ -19,3 +19,21 @@ function openFutureDate(target) {
   });
   SpinningWheel.open();
 }
+
+function showhide(id){
+  if (document.getElementById){
+    obj = document.getElementById(id);
+    if (obj.style.display == "none"){
+      obj.style.display = "";
+    } else {
+      obj.style.display = "none";
+    }
+  }
+}
+
+function preview() {
+  
+  for (var i in content) {
+    console.info(i);
+  }
+}

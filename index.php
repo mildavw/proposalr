@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" />
   <script type="text/javascript" src="spinningwheel-min.js"></script>
   <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="content.js"></script>
 
   </head>
 
@@ -34,68 +35,67 @@ function checkbox($var,$label,$prefix) {
 ?>
 
 <body>
-<form method="POST" action="process.php">
+<div id='input' style='display:block'>
   <fieldset class="edgeToEdge">
   <legend>Contact Info</legend>
   <dl class="edgeToEdge formFields">
-  <?php
-dict_field('bride_first','Bride First:');
-dict_field('bride_last','Bride Last:');
-dict_field('groom_first','Groom First:');
-dict_field('groom_last','Groom Last:');
-dict_field('salutation','Salutation:');
-dict_field('address','Address:');
-dict_field('city','City:');
-dict_field('state','State:');
-dict_field('zip','Zip:');
-dict_field('phone','Phone:');
-dict_field('email','Email:');
-?>
+    <?php
+      dict_field('bride_first','Bride First:');
+      dict_field('bride_last','Bride Last:');
+      dict_field('groom_first','Groom First:');
+      dict_field('groom_last','Groom Last:');
+      dict_field('salutation','Salutation:');
+      dict_field('address','Address:');
+      dict_field('city','City:');
+      dict_field('state','State:');
+      dict_field('zip','Zip:');
+      dict_field('phone','Phone:');
+      dict_field('email','Email:');
+    ?>
   </dl>
   </fieldset>
 
   <fieldset class="edgeToEdge">
   <legend>Wedding Info</legend>
   <dl class="edgeToEdge formFields">
-  <?php
-date_field('wedding_date','Date:');
-dict_field('wedding_loc','Location:');
-dict_field('num_people','Number Guests:');
-dict_field('num_locations','Number Locations:');
-?>
+    <?php
+      date_field('wedding_date','Date:');
+      dict_field('wedding_loc','Location:');
+      dict_field('num_people','Number Guests:');
+      dict_field('num_locations','Number Locations:');
+    ?>
   </dl>
   </fieldset>
 
   <fieldset class="edgeToEdge">
   <legend>Services Info</legend>
   <dl class="edgeToEdge formFields">
-
-  <?php
-dict_field('num_consultations','# of Consultations:');
-dict_field('num_sites','# of Sites:');
-dict_field('num_assistants','# of Assistants:');
-?>
+    <?php
+      dict_field('num_consultations','# of Consultations:');
+      dict_field('num_sites','# of Sites:');
+      dict_field('num_assistants','# of Assistants:');
+    ?>
 
   <dt>Vendor Suggestions:</dt>
   <dd>
-  <?php
-checkbox('photographer','Photographer','vendor');
-checkbox('videographer','Videographer','vendor');
-checkbox('hair_stylist','Hair Stylist','vendor');
-checkbox('makeup_artist','Makeup Artist','vendor');
-checkbox('caterer','Caterer','vendor');
-checkbox('cake_baker','Cake Baker','vendor');
-checkbox('rentals','Rentals','vendor');
-checkbox('florist','Florist','vendor');
-checkbox('ceremony_music','Ceremony Music','vendor');
-checkbox('reception_music','Reception Music','vendor');
-checkbox('rehearsal_dinner_site','Rehearsal Dinner Site','vendor');
-checkbox('attire','Attire','vendor');
-checkbox('invitations','invitations','vendor');
-checkbox('getting_ready_site','Getting Ready Site','vendor');
-checkbox('lodging','Lodging','vendor');
-checkbox('transportation','Transportation','vendor');
-?>
+    <?php
+      checkbox('photographer','Photographer','vendor');
+      checkbox('videographer','Videographer','vendor');
+      checkbox('hair_stylist','Hair Stylist','vendor');
+      checkbox('makeup_artist','Makeup Artist','vendor');
+      checkbox('caterer','Caterer','vendor');
+      checkbox('cake_baker','Cake Baker','vendor');
+      checkbox('rentals','Rentals','vendor');
+      checkbox('florist','Florist','vendor');
+      checkbox('ceremony_music','Ceremony Music','vendor');
+      checkbox('reception_music','Reception Music','vendor');
+      checkbox('rehearsal_dinner_site','Rehearsal Dinner Site','vendor');
+      checkbox('attire','Attire','vendor');
+      checkbox('invitations','invitations','vendor');
+      checkbox('getting_ready_site','Getting Ready Site','vendor');
+      checkbox('lodging','Lodging','vendor');
+      checkbox('transportation','Transportation','vendor');
+    ?>
   </dd>
 
   <dt><label for="elements">Elements</label></dt>
@@ -108,36 +108,42 @@ checkbox('transportation','Transportation','vendor');
 
   <dt>Will Oversee:</dt>
   <dd>
-  <?php
-checkbox('tents','Tents','oversee');
-checkbox('lighting','Lighting','oversee');
-checkbox('infrastructure','Infrastructure','oversee');
-checkbox('arches_or_canopies','Arches or Canopies','oversee');
-checkbox('aisle_and_altar_décor','Aisle And Altar Décor','oversee');
-checkbox('floral_arrangements','Floral Arrangements','oversee');
-checkbox('tablescape','Tablescape','oversee');
-checkbox('other','Other custom-built items','oversee');
-?>
+    <?php
+      checkbox('tents','Tents','oversee');
+      checkbox('lighting','Lighting','oversee');
+      checkbox('infrastructure','Infrastructure','oversee');
+      checkbox('arches_or_canopies','Arches or Canopies','oversee');
+      checkbox('aisle_and_altar_décor','Aisle And Altar Décor','oversee');
+      checkbox('floral_arrangements','Floral Arrangements','oversee');
+      checkbox('tablescape','Tablescape','oversee');
+      checkbox('other','Other custom-built items','oversee');
+    ?>
   </dd>
 
   <?php
-dict_field('flat_fee','Flat Fee:');
-dict_field('due_on_sign','Due Upon Signing:');
-dict_field('qrtly_pmt','Quarterly Payment:');
-date_field('pmt_date_1','Payment Date 1:');
-date_field('pmt_date_2','Payment Date 2:');
-date_field('pmt_date_3','Payment Date 3:');
-date_field('option_date','Option Date:');
-?>
-
+    dict_field('flat_fee','Flat Fee:');
+    dict_field('due_on_sign','Due Upon Signing:');
+    dict_field('qrtly_pmt','Quarterly Payment:');
+    date_field('pmt_date_1','Payment Date 1:');
+    date_field('pmt_date_2','Payment Date 2:');
+    date_field('pmt_date_3','Payment Date 3:');
+    date_field('option_date','Option Date:');
+  ?>
   </dl>
   </fieldset>
 
   <p class="edgeToEdge formButtons">
-    <input type="submit" value="Submit">
+    <button onclick='showhide("input");preview();showhide("preview");'>Submit</button>
   </p>
+</div>
 
-  </form>
+<div id="preview" style="display:none;">
+
+  <p class="edgeToEdge formButtons">
+    <button onclick='showhide("input");showhide("preview");'>Submit</button>
+  </p>
+</div>
+
 
   <div class="footer">
     Proposalr &copy; EJP Events, 2011
