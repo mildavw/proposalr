@@ -75,22 +75,22 @@ function checkbox($var,$label,$prefix) {
   <dt>Vendor Suggestions:</dt>
   <dd>
     <?php
-      checkbox('photographer','Photographer','vendor');
-      checkbox('videographer','Videographer','vendor');
-      checkbox('hair_stylist','Hair Stylist','vendor');
-      checkbox('makeup_artist','Makeup Artist','vendor');
-      checkbox('caterer','Caterer','vendor');
-      checkbox('cake_baker','Cake Baker','vendor');
-      checkbox('rentals','Rentals','vendor');
-      checkbox('florist','Florist','vendor');
-      checkbox('ceremony_music','Ceremony Music','vendor');
-      checkbox('reception_music','Reception Music','vendor');
-      checkbox('rehearsal_dinner_site','Rehearsal Dinner Site','vendor');
-      checkbox('attire','Attire','vendor');
-      checkbox('invitations','invitations','vendor');
-      checkbox('getting_ready_site','Getting Ready Site','vendor');
-      checkbox('lodging','Lodging','vendor');
-      checkbox('transportation','Transportation','vendor');
+      checkbox('photographer','Photographer','vendors');
+      checkbox('videographer','Videographer','vendors');
+      checkbox('hair_stylist','Hair Stylist','vendors');
+      checkbox('makeup_artist','Makeup Artist','vendors');
+      checkbox('caterer','Caterer','vendors');
+      checkbox('cake_baker','Cake Baker','vendors');
+      checkbox('rentals','Rentals','vendors');
+      checkbox('florist','Florist','vendors');
+      checkbox('ceremony_music','Ceremony Music','vendors');
+      checkbox('reception_music','Reception Music','vendors');
+      checkbox('rehearsal_dinner_site','Rehearsal Dinner Site','vendors');
+      checkbox('attire','Attire','vendors');
+      checkbox('invitations','invitations','vendors');
+      checkbox('getting_ready_site','Getting Ready Site','vendors');
+      checkbox('lodging','Lodging','vendors');
+      checkbox('transportation','Transportation','vendors');
     ?>
   </dd>
 
@@ -112,7 +112,7 @@ function checkbox($var,$label,$prefix) {
       checkbox('aisle_and_altar_décor','Aisle And Altar Décor','oversee');
       checkbox('floral_arrangements','Floral Arrangements','oversee');
       checkbox('tablescape','Tablescape','oversee');
-      checkbox('other','Other custom-built items','oversee');
+      checkbox('other_custom-built_items','Other custom-built items','oversee');
     ?>
   </dd>
 
