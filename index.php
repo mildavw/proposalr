@@ -130,13 +130,14 @@ function checkbox($var,$label,$prefix) {
   </fieldset>
 
   <p class="edgeToEdge formButtons">
-    <button onclick='$("#setup").hide();preview();$("#preview").show();'>Submit</button>
+    <button onclick='$("#setup").hide();preview();$("#preview").show();'>Review Content</button>
   </p>
 </div>
 
 <div id="preview" style="display:none;">
   <p class="edgeToEdge formButtons">
-    <button onclick='$("#preview").hide();$("#setup").show();'>Submit</button>
+    <button onclick='$("#preview").hide();$("#setup").show();'>Edit Details</button>
+    <button>Download PDF</button>
   </p>
 </div>
 
