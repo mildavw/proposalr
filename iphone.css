@@ -50,7 +50,8 @@ legend {
 
 #setup legend{
   width:100%;
-  font-size: 18px; 
+  font-size: 18px;
+  padding: 10px 0;
 }
 
 dl.edgeToEdge.formFields dd {
