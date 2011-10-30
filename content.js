@@ -1,33 +1,6 @@
-// address: ""
-// avenues: "Suggest avenues and methods that will..."
-// bride_first: ""
-// bride_last: ""
-// city: ""
-// due_on_sign: ""
-// elements: "Work with vendors and oversee the production of design elements, such as printed materials, attire elements, and décor details."
-// email: ""
-// flat_fee: ""
-// groom_first: ""
-// groom_last: ""
-// num_assistants: ""
-// num_consultations: ""
-// num_locations: ""
-// num_people: ""
-// num_sites: ""
-// option_date: ""
-// oversee: "infrastructure, arches or canopies, aisle and altar décor, and tablescape"
-// pmt_date_1: ""
-// pmt_date_2: ""
-// pmt_date_3: ""
-// qrtly_pmt: ""
-// salutation: ""
-// vendors: "rentals, florist, ceremony music, and reception music"
-// wedding_date: ""
-// wedding_loc: ""
-
 content = {};
 
-var text = "«bride_first» «bride_first»\n";
+var text = "«bride_first» «bride_last»\n";
 text += "and «groom_first» «groom_last»\n";
 text += "«address»\n";
 text += "«city» «state», «zip»\n";
