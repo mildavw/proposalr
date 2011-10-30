@@ -24,18 +24,18 @@ function date_field($var,$label) {
   echo "</dd>";
 }
 function checkbox($var,$label,$prefix) {
-  echo "<br />";
+  echo '<div class="checkbox">';
   echo "<label for='{$var}'>{$label}";
   echo "<input type='checkbox' name='{$var}' id='{$var}' value='{$prefix}_{$var}' checked='checked'/>";
-  echo "</label>";
+  echo "</label></div>";
 }
 ?>
 
 <body>
 <div id='setup' style='display:block'>
-  <fieldset class="edgeToEdge">
-  <legend>Contact Info</legend>
-  <dl class="edgeToEdge formFields">
+  <fieldset class="edgeToEdge contact">
+  <legend>Contact</legend>
+  <dl class="edgeToEdge formFields" style="display:none;">
     <?php
       dict_field('bride_first','Bride First:');
       dict_field('bride_last','Bride Last:');
@@ -52,9 +52,9 @@ function checkbox($var,$label,$prefix) {
   </dl>
   </fieldset>
 
-  <fieldset class="edgeToEdge">
-  <legend>Wedding Info</legend>
-  <dl class="edgeToEdge formFields">
+  <fieldset class="edgeToEdge wedding">
+  <legend>Wedding</legend>
+  <dl class="edgeToEdge formFields" style="display:none;">
     <?php
       date_field('wedding_date','Date:');
       dict_field('wedding_loc','Location:');
@@ -65,8 +65,8 @@ function checkbox($var,$label,$prefix) {
   </fieldset>
 
   <fieldset class="edgeToEdge">
-  <legend>Services Info</legend>
-  <dl class="edgeToEdge formFields">
+  <legend>Services</legend>
+  <dl class="edgeToEdge formFields" style="display:none;">
     <?php
       dict_field('num_consultations','# of Consultations:');
       dict_field('num_sites','# of Sites:');
@@ -116,7 +116,12 @@ function checkbox($var,$label,$prefix) {
       checkbox('other_custom-built_items','Other custom-built items','oversee');
     ?>
   </dd>
+  </dl>
+  </fieldset>
 
+  <fieldset class="edgeToEdge">
+  <legend>Fees</legend>
+  <dl class="edgeToEdge formFields" style="display:none;">
   <?php
     dict_field('flat_fee','Flat Fee:');
     dict_field('due_on_sign','Due Upon Signing:');
@@ -150,7 +155,10 @@ function checkbox($var,$label,$prefix) {
 <script type="text/javascript" src="content.js"></script>
 <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
-  add_calculation_buttons();
+  $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_qrtly_payment();">Calculate</button>');
+  $('input[name=option_date]').parent().append('<button onclick="calc_option_date()">Calculate</button>');
+  $('input[name=pmt_date_1]').parent().append('<button onclick="calc_payments">Calculate</button>');
+  $('#setup legend').click(function() {$(this).siblings().toggle();});
 </script>
 </body>
 </html>
