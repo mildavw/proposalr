@@ -97,16 +97,26 @@ function preview() {
   substitutions = hash_add(substitutions, $('#setup textarea'));
   substitutions = hash_add(substitutions, $('#setup input[type=hidden]'));
   substitutions = hash_add_checked(substitutions, $('#setup input:checked'));
+
+  var new_content = jQuery.extend({}, content);
+  for (var j in substitutions) {
+    var reg = new RegExp('«'+j+'»', 'gim');
+    if (substitutions[j] != '') {
+      for (var i in new_content) {
+        new_content[i] = new_content[i].replace(reg,substitutions[j]);
+      }
+    }
+  } 
   
   if ($('#preview dt').length > 0) {
-    for (var i in content) {
-      $('#' + underscore(i)).html( content[i] );
+    for (var i in new_content) {
+      $('#' + underscore(i)).html( new_content[i] );
     }
   } else {
-    var insert = '<dl>';
-    for (i in content) {
+    var insert = '<dl class="edgeToEdge formFields">';
+    for (i in new_content) {
       insert += '<dt><label for="'+underscore(i)+'">' + i + '</label></dt>';
-      insert += '<dd><textarea cols="60" rows="10" name="name" id="'+underscore(i)+'">' + content[i] + '</textarea></dd>';
+      insert += '<dd><textarea cols="60" rows="10" name="name" id="'+underscore(i)+'">' + new_content[i] + '</textarea></dd>';
     }
     $('#preview p').before(insert + '</dl>');
   }
