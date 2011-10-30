@@ -21,12 +21,6 @@ function openFutureDate(target) {
   SpinningWheel.open();
 }
 
-function add_calculation_buttons() {
-  $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_qrtly_payment();">Calculate</button>');
-  $('input[name=option_date]').parent().append('<button onclick="calc_option_date()">Calculate</button>');
-  $('input[name=pmt_date_1]').parent().append('<button onclick="calc_payments">Calculate</button>');
-}
-
 function calc_qrtly_payment() {
   var fee = parseFloat($('input[name=flat_fee]').val());
   var deposit = parseFloat($('input[name=due_on_sign]').val());
@@ -48,16 +42,56 @@ function set_pmt_date(target, value) {
 function calc_option_date() {
   now = new Date();
   two_weeks = new Date(now.getTime() + (14 * 24 * 60 * 60 * 1000));
-  var result = [months[two_weeks.getMonth()], two_weeks.getDate(), two_weeks.getFullYear()].join(' ');
+  var result = display_date(two_weeks);
   set_pmt_date('option_date', result);
 }
 
 function calc_dates() {
-
+  var start = parse_date(start_date);
+  var end = parse_date(end_date);
+  var results = date_quarters(start, end);
+  set_pmt_date('pmt_date_1', results[0]);
+  set_pmt_date('pmt_date_2', results[1]);
+  set_pmt_date('pmt_date_3', results[2]);
 }
 
 function date_quarters(start_date, end_date) {
-  
+  var interval = (end_date - start_date)/4;
+  // if (interval < 14 * 24 * 60 * 60 * 1000) {
+    // something with 14 days before wedding?
+  // } else {
+    var date_1 = round_date(new Date(start_date.getTime() + interval));
+    var date_2 = round_date(new Date(start_date.getTime() + 2*interval));
+    var date_3 = round_date(new Date(start_date.getTime() + 3*interval));
+  // }
+  return [date_1, date_2, date_3];
+}
+
+function round_date(date) {
+  // rounds date to closest of 
+  // a) 1st of this month, b) 15th of this month, c) 1st of next month
+  var m = date.getMonth();
+  var y = date.getFullYear();
+  var a_delta = date - new Date(y, m, 1);
+  var b_delta = Math.abs(new Date(y, m, 15) - date);
+  var c = next_month(m,y);
+  var c_delta = new Date(c.year, c.month, 1) - date;
+  var winner_idx = $.inArray(Math.min(a_delta, b_delta, c_delta), [a_delta, b_delta, c_delta]);
+  return [new Date(y,m,1), new Date(y,m,15), new Date(c.year, c.month, 1)][winner_idx];
+}
+
+function next_month(mon, yr) {
+  if (mon == 11) return {month:0,year:yr+1};
+  return {month:mon+1,year:yr};
+}
+
+function parse_date(date_string) {
+  var parts = date_string.split(' ');
+  return new Date(parts[2], 1+$.inArray(parts[0], months), parts[1]);
+}
+
+function display_date(date) {
+  return [months[date.getMonth()], date.getDate(), date.getFullYear()].join(' ');
 }
 
 function hash_add(hash, elements) {
