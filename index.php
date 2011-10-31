@@ -25,9 +25,9 @@ function date_field($var,$label) {
 }
 function checkbox($var,$label,$prefix) {
   echo '<div class="checkbox">';
-  echo "<label for='{$var}'>{$label}";
+  echo "<label for='{$var}' onclick='$(\"#{$var}\").check()'>{$label}</label>";
   echo "<input type='checkbox' name='{$var}' id='{$var}' value='{$prefix}_{$var}' checked='checked'/>";
-  echo "</label></div>";
+  echo "</div>";
 }
 ?>
 
