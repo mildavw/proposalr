@@ -64,6 +64,14 @@ describe("Main", function() {
       expect(set_pmt_date).toHaveBeenCalledWith(['pmt_date_1','14 days prior to the event'], ['pmt_date_2',''], ['pmt_date_3','']);
     });
 
+    it('returns "14 days before event" display given a wedding date that is sufficiently soon', function() {
+      var event_date = 'Jan 24 2011';
+      spyOn($.fn, 'val').andCallFake(function() {return event_date;});
+      calc_payment_dates(3);
+      var message = '14 days prior to the event';
+      expect(set_pmt_date).toHaveBeenCalledWith(['pmt_date_1','Jan 1 2011'], ['pmt_date_2',message], ['pmt_date_3',message]);
+    });
+
   });
 
 });

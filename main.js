@@ -59,8 +59,9 @@ function calc_payment_dates(n) {
     var start = today();
     var end = parse_date(wedding_date);
     var results = n_payment_dates(start, end, n);
-    if (end - results[n-1] < 14 * 24 * 60 * 60 * 1000) {
-      results[n-1] = '14 days prior to the event';
+    for (var i=n-1;i>-1;i--)
+    if (end - results[i] < 14 * 24 * 60 * 60 * 1000) {
+      results[i] = '14 days prior to the event';
     }
     set_pmt_date('pmt_date_1', results[0] ? date_for_display(results[0]) : '');
     set_pmt_date('pmt_date_2', results[1] ? date_for_display(results[1]) : '');
