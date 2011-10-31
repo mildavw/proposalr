@@ -21,7 +21,14 @@ function openFutureDate(target) {
   SpinningWheel.open();
 }
 
-function calc_qrtly_payment() {
+function calc_option_date() {
+  now = new Date();
+  two_weeks = new Date(now.getTime() + (14 * 24 * 60 * 60 * 1000));
+  var result = date_for_display(two_weeks);
+  set_pmt_date('option_date', result);
+}
+
+function calc_payments(n) {
   var fee = parseFloat($('input[name=flat_fee]').val());
   var deposit = parseFloat($('input[name=due_on_sign]').val());
   if (isNaN(fee) || isNaN(deposit)) {
@@ -29,41 +36,43 @@ function calc_qrtly_payment() {
   } else if (deposit > fee) {
     alert("Deposit can't be larger than flat fee.");
   } else {
-    var payment = (fee - deposit) / 3;
+    var payment = (fee - deposit) / n;
     $('input[name=qrtly_pmt]').val(parseFloat(payment).toFixed(2));
+    calc_payment_dates(n);
   }
 }
 
-function set_pmt_date(target, value) {
-  $('#input[name=' + target + ']').val(value);
-  $('#display_' + target).html(value);
+function set_pmt_date(target, date) {
+  $('#input[name=' + target + ']').val(date);
+  $('#display_' + target).html(date);
 }
 
-function calc_option_date() {
-  now = new Date();
-  two_weeks = new Date(now.getTime() + (14 * 24 * 60 * 60 * 1000));
-  var result = display_date(two_weeks);
-  set_pmt_date('option_date', result);
+function today() { // can spy on this
+  return new Date(); 
 }
 
-function calc_dates() {
-  var start = parse_date(start_date);
-  var end = parse_date(end_date);
-  var results = date_quarters(start, end);
-  set_pmt_date('pmt_date_1', results[0]);
-  set_pmt_date('pmt_date_2', results[1]);
-  set_pmt_date('pmt_date_3', results[2]);
+function calc_payment_dates(n) {
+  var wedding_date = $('#wedding_date').val();
+  if (wedding_date == '') {
+    alert('Please set a wedding date.');
+  } else {
+    var start = today();
+    var end = parse_date(wedding_date);
+    var results = n_payment_dates(start, end, n);
+    if (end - results[n-1] < 14 * 24 * 60 * 60 * 1000) {
+      results[n-1] = '14 days prior to the event';
+    }
+    set_pmt_date('pmt_date_1', results[0] ? date_for_display(results[0]) : '');
+    set_pmt_date('pmt_date_2', results[1] ? date_for_display(results[1]) : '');
+    set_pmt_date('pmt_date_3', results[2] ? date_for_display(results[2]) : '');
+  }
 }
 
-function date_quarters(start_date, end_date) {
-  var interval = (end_date - start_date)/4;
-  // if (interval < 14 * 24 * 60 * 60 * 1000) {
-    // something with 14 days before wedding?
-  // } else {
-    var date_1 = round_date(new Date(start_date.getTime() + interval));
-    var date_2 = round_date(new Date(start_date.getTime() + 2*interval));
-    var date_3 = round_date(new Date(start_date.getTime() + 3*interval));
-  // }
+function n_payment_dates(start_date, end_date, n) {
+  var interval = (end_date - start_date)/(n+1);
+  var date_1 = round_date(new Date(start_date.getTime() + interval));
+  var date_2 = n > 1 ? round_date(new Date(start_date.getTime() + 2*interval)) : null;
+  var date_3 = n > 2 ? round_date(new Date(start_date.getTime() + 3*interval)) : null;
   return [date_1, date_2, date_3];
 }
 
@@ -87,10 +96,11 @@ function next_month(mon, yr) {
 
 function parse_date(date_string) {
   var parts = date_string.split(' ');
-  return new Date(parts[2], 1+$.inArray(parts[0], months), parts[1]);
+  return new Date(parts[2], $.inArray(parts[0], months), parts[1]);
 }
 
-function display_date(date) {
+function date_for_display(date) {
+  if (typeof(date) == 'string') return date;
   return [months[date.getMonth()], date.getDate(), date.getFullYear()].join(' ');
 }
 

@@ -939,6 +939,7 @@ jasmine.Env.prototype.equals_ = function(a, b, mismatchKeys, mismatchValues) {
 };
 
 jasmine.Env.prototype.contains_ = function(haystack, needle) {
+  if (this.equals_(haystack,needle)) return true;
   if (jasmine.isArray_(haystack)) {
     for (var i = 0; i < haystack.length; i++) {
       if (this.equals_(haystack[i], needle)) return true;

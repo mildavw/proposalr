@@ -123,10 +123,10 @@ function checkbox($var,$label,$prefix) {
   <legend>Fees</legend>
   <dl class="edgeToEdge formFields" style="display:none;">
   <?php
+    date_field('option_date','Option Date:');
     dict_field('flat_fee','Flat Fee:');
     dict_field('due_on_sign','Due Upon Signing:');
-    dict_field('qrtly_pmt','Quarterly Payment:');
-    date_field('option_date','Option Date:');
+    dict_field('qrtly_pmt','Payment Amount:');
     date_field('pmt_date_1','Payment Date 1:');
     date_field('pmt_date_2','Payment Date 2:');
     date_field('pmt_date_3','Payment Date 3:');
@@ -155,9 +155,9 @@ function checkbox($var,$label,$prefix) {
 <script type="text/javascript" src="content.js"></script>
 <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
-  $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_qrtly_payment();">Calculate</button>');
   $('input[name=option_date]').parent().append('<button onclick="calc_option_date()">Calculate</button>');
-  $('input[name=pmt_date_1]').parent().append('<button onclick="calc_payments">Calculate</button>');
+  $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_payments(1);">Calculate 2</button>');
+  $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_payments(3);">Calculate 4</button>');
   $('#setup legend').click(function() {$(this).siblings().toggle();});
 </script>
 </body>
