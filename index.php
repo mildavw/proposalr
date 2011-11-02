@@ -4,7 +4,7 @@
 <head runat="server">
   <title>EJP Events Proposalr</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta id="viewport" name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <link rel="stylesheet" href="iphone.css" />
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 
@@ -150,11 +150,16 @@ function checkbox($var,$label,$prefix) {
   Proposalr &copy; EJP Events, 2011
 </div>
 
-<script type="text/javascript" src="spinningwheel-min.js"></script>
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="content.js"></script>
 <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
+  if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+    document.write('<script type="text/javascript" src="spinningwheel-min.js"><\/script>')
+    document.write('<script type="text/javascript" src="ios.js"><\/script>')
+  } else {
+    document.write('<script type="text/javascript" src="non-ios.js"><\/script>')
+  };
   $('input[name=option_date]').parent().append('<button onclick="calc_option_date()">Calculate</button>');
   $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_payments(1);">Calculate 2</button>');
   $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_payments(3);">Calculate 4</button>');
