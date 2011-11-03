@@ -22,7 +22,7 @@ function calc_payments(n) {
 }
 
 function set_pmt_date(target, date) {
-  $('#input[name=' + target + ']').val(date);
+  $('input[name=' + target + ']').val(date);
 }
 
 function today() { // can spy on this

@@ -13,9 +13,9 @@
   </head>
 
   <?php
-function dict_field($var,$label) {
+function dict_field($var,$label,$is_numeric=false) {
   echo "<dt><label for='{$var}'>{$label}</label></dt>";
-  echo "<dd><input type='text' name='{$var}' value='' /></dd>";
+  echo "<dd><input type='text' name='{$var}' value='' " . ($is_numeric ? "pattern='[0-9]*'" : '') . "/></dd>";
 }
 function date_field($var,$label) {
   echo "<dt><label for='{$var}'>{$label}</label></dt>";
@@ -122,8 +122,8 @@ function checkbox($var,$label,$prefix) {
   <dl class="edgeToEdge formFields" style="display:none;">
   <?php
     date_field('option_date','Option Date:');
-    dict_field('flat_fee','Flat Fee:');
-    dict_field('due_on_sign','Due Upon Signing:');
+    dict_field('flat_fee','Flat Fee:',true);
+    dict_field('due_on_sign','Due Upon Signing:',true);
     dict_field('qrtly_pmt','Payment Amount:');
     date_field('pmt_date_1','Payment Date 1:');
     date_field('pmt_date_2','Payment Date 2:');
@@ -153,7 +153,7 @@ function checkbox($var,$label,$prefix) {
 <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
   if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
-    $('head').append('<link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" />');
+    $('head').append('<link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" \/>');
     document.write('<script type="text/javascript" src="spinningwheel-min.js"><\/script>')
     document.write('<script type="text/javascript" src="ios.js"><\/script>')
   } else {
