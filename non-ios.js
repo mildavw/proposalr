@@ -1,3 +1,2 @@
-function openFutureDate(target) {
-  console.info('need some sort of date picker here.');
-};
+$('.date').datepicker();
+$('.date').datepicker( "option", "dateFormat", 'M d yy' );

@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 
   <link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" />
+
   </head>
 
   <?php
@@ -18,10 +19,7 @@ function dict_field($var,$label) {
 }
 function date_field($var,$label) {
   echo "<dt><label for='{$var}'>{$label}</label></dt>";
-  echo "<dd><input type='hidden' name='{$var}' id='{$var}' value=''/>";
-  echo  "<span id='display_{$var}'></span>";
-  echo  "<button onclick='openFutureDate(\"{$var}\"); return false;'>Set</button>";
-  echo "</dd>";
+  echo "<dd><input type='text' name='{$var}' id='{$var}' value='' class='date'/></dd>";
 }
 function checkbox($var,$label,$prefix) {
   echo '<div class="checkbox">';
@@ -155,9 +153,12 @@ function checkbox($var,$label,$prefix) {
 <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
   if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+    $('head').append('<link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" />');
     document.write('<script type="text/javascript" src="spinningwheel-min.js"><\/script>')
     document.write('<script type="text/javascript" src="ios.js"><\/script>')
   } else {
+    $('head').append('<link rel="stylesheet" href="jquery-ui-1.8.16.custom/css/ui-lightness/jquery-ui-1.8.16.custom.css" type="text/css" media="all" />');
+    document.write('<script type="text/javascript" src="jquery-ui-1.8.16.custom/js/jquery-ui-1.8.16.custom.min.js"><\/script>')
     document.write('<script type="text/javascript" src="non-ios.js"><\/script>')
   };
   $('input[name=option_date]').parent().append('<button onclick="calc_option_date()">Calculate</button>');

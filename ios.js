@@ -1,4 +1,4 @@
-function openFutureDate(target) {
+function openDateSpinner(target) {
   var now = new Date();
   var days = {};
   var years = {};
@@ -13,8 +13,10 @@ function openFutureDate(target) {
   SpinningWheel.addSlot(years, 'right', now.getFullYear());
   SpinningWheel.setDoneAction(function() {
     var results = SpinningWheel.getSelectedValues().values.join(' ');
-    document.getElementById(target).value = results;
-    document.getElementById('display_' + target).innerHTML = results;
+    $(target).val(results);
   });
   SpinningWheel.open();
 }
+
+$('.date').focus(function() {openDateSpinner(this);});
+$('.date').attr('readonly','readonly');
