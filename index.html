@@ -9,32 +9,31 @@
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 
   <link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" />
-
-  </head>
-
-  <?php
-function dict_field($var,$label,$is_numeric=false) {
-  echo "<dt><label for='{$var}'>{$label}</label></dt>";
-  echo "<dd><input type='text' name='{$var}' value='' " . ($is_numeric ? "pattern='[0-9]*'" : '') . "/></dd>";
-}
-function date_field($var,$label) {
-  echo "<dt><label for='{$var}'>{$label}</label></dt>";
-  echo "<dd><input type='text' name='{$var}' id='{$var}' value='' class='date'/></dd>";
-}
-function checkbox($var,$label,$prefix) {
-  echo '<div class="checkbox">';
-  echo "<label for='{$var}' onclick='$(\"#{$var}\").check()'>{$label}</label>";
-  echo "<input type='checkbox' name='{$var}' id='{$var}' value='{$prefix}_{$var}' checked='checked'/>";
-  echo "</div>";
-}
-?>
+  <script type="text/javascript">
+    function dict_field(variable,label,is_numeric) {
+      is_numeric = typeof(is_numeric) == 'undefined' ? false : true;
+      document.write("<dt><label for='"+variable+"'>"+label+"</label></dt>");
+      document.write("<dd><input type='text' name='"+variable+"' value='' " + (is_numeric ? "pattern='[0-9]*'" : '') + "/></dd>");
+    }
+    function date_field(variable,label) {
+      document.write("<dt><label for='"+variable+"'>"+label+"</label></dt>");
+      document.write("<dd><input type='text' name='"+variable+"' id='"+variable+"' value='' class='date'/></dd>");
+    }
+    function checkbox(variable,label,prefix) {
+      document.write('<div class="checkbox">');
+      document.write("<label for='"+variable+"' onclick='$(\"#"+variable+"\").check()'>"+label+"</label>");
+      document.write("<input type='checkbox' name='"+variable+"' id='"+variable+"' value='"+prefix+"_"+variable+"' checked='checked'/>");
+      document.write("</div>");
+    }
+  </script>
+</head>
 
 <body>
 <div id='setup' style='display:block'>
   <fieldset class="edgeToEdge contact">
   <legend>Contact</legend>
   <dl class="edgeToEdge formFields" style="display:none;">
-    <?php
+    <script type="text/javascript">
       dict_field('bride_first','Bride First:');
       dict_field('bride_last','Bride Last:');
       dict_field('groom_first','Groom First:');
@@ -46,34 +45,34 @@ function checkbox($var,$label,$prefix) {
       dict_field('zip','Zip:');
       dict_field('phone','Phone:');
       dict_field('email','Email:');
-    ?>
+    </script>
   </dl>
   </fieldset>
 
   <fieldset class="edgeToEdge wedding">
   <legend>Wedding</legend>
   <dl class="edgeToEdge formFields" style="display:none;">
-    <?php
+  <script type="text/javascript">
       date_field('wedding_date','Date:');
       dict_field('wedding_loc','Location:');
       dict_field('num_people','Number Guests:');
       dict_field('num_locations','Number Locations:');
-    ?>
+      </script>
   </dl>
   </fieldset>
 
   <fieldset class="edgeToEdge">
   <legend>Services</legend>
   <dl class="edgeToEdge formFields" style="display:none;">
-    <?php
+  <script type="text/javascript">
       dict_field('num_consultations','# of Consultations:');
       dict_field('num_sites','# of Sites:');
       dict_field('num_assistants','# of Assistants:');
-    ?>
+    </script>
 
   <dt>Vendor Suggestions:</dt>
   <dd>
-    <?php
+  <script type="text/javascript">
       checkbox('photographer','Photographer','vendors');
       checkbox('videographer','Videographer','vendors');
       checkbox('hair_stylist','Hair Stylist','vendors');
@@ -90,7 +89,7 @@ function checkbox($var,$label,$prefix) {
       checkbox('getting_ready_site','Getting Ready Site','vendors');
       checkbox('lodging','Lodging','vendors');
       checkbox('transportation','Transportation','vendors');
-    ?>
+      </script>
   </dd>
 
   <dt><label for="elements">Elements</label></dt>
@@ -103,7 +102,7 @@ function checkbox($var,$label,$prefix) {
 
   <dt>Will Oversee:</dt>
   <dd>
-    <?php
+  <script type="text/javascript">
       checkbox('tents','Tents','oversee');
       checkbox('lighting','Lighting','oversee');
       checkbox('infrastructure','Infrastructure','oversee');
@@ -112,7 +111,7 @@ function checkbox($var,$label,$prefix) {
       checkbox('floral_arrangements','Floral Arrangements','oversee');
       checkbox('tablescape','Tablescape','oversee');
       checkbox('other_custom-built_items','Other custom-built items','oversee');
-    ?>
+    </script>
   </dd>
   </dl>
   </fieldset>
@@ -120,7 +119,7 @@ function checkbox($var,$label,$prefix) {
   <fieldset class="edgeToEdge">
   <legend>Fees</legend>
   <dl class="edgeToEdge formFields" style="display:none;">
-  <?php
+  <script type="text/javascript">
     date_field('option_date','Option Date:');
     dict_field('flat_fee','Flat Fee:',true);
     dict_field('due_on_sign','Due Upon Signing:',true);
@@ -128,7 +127,7 @@ function checkbox($var,$label,$prefix) {
     date_field('pmt_date_1','Payment Date 1:');
     date_field('pmt_date_2','Payment Date 2:');
     date_field('pmt_date_3','Payment Date 3:');
-  ?>
+  </script>
   </dl>
   </fieldset>
 
@@ -152,15 +151,8 @@ function checkbox($var,$label,$prefix) {
 <script type="text/javascript" src="content.js"></script>
 <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
-  if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
-    $('head').append('<link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" \/>');
-    document.write('<script type="text/javascript" src="spinningwheel-min.js"><\/script>')
-    document.write('<script type="text/javascript" src="ios.js"><\/script>')
-  } else {
-    $('head').append('<link rel="stylesheet" href="jquery-ui-1.8.16.custom/css/ui-lightness/jquery-ui-1.8.16.custom.css" type="text/css" media="all" />');
-    document.write('<script type="text/javascript" src="jquery-ui-1.8.16.custom/js/jquery-ui-1.8.16.custom.min.js"><\/script>')
-    document.write('<script type="text/javascript" src="non-ios.js"><\/script>')
-  };
+  var os_script = (navigator.userAgent.match(/iPhone|iPad/i)) ? 'ios' : 'non-ios';
+  document.write('<script type="text/javascript" src="'+os_script+'.js"><\/script>')
   $('input[name=option_date]').parent().append('<button onclick="calc_option_date()">Calculate</button>');
   $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_payments(1);">Calculate 2</button>');
   $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_payments(3);">Calculate 4</button>');
