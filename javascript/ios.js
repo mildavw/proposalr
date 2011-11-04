@@ -1,5 +1,5 @@
-$('head').append('<link rel="stylesheet" href="spinningwheel.css" type="text/css" \/>');
-$('head').append('<script type="text/javascript" src="spinningwheel-min.js"><\/script>');
+$('head').append('<link rel="stylesheet" href="javascript/spinningwheel/spinningwheel.css" type="text/css" \/>');
+$('head').append('<script type="text/javascript" src="javascript/spinningwheel/spinningwheel-min.js"><\/script>');
 
 function openDateSpinner(target) {
   var now = new Date();

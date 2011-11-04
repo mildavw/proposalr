@@ -1,7 +1,0 @@
-<?php
-
-require('content.php');
-
-
-
-?>

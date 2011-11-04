@@ -1,7 +1,4 @@
 <?php
-
-$filename = $_POST['bride_last'] . '-' . $_POST['groom_last'] . '.pdf';
-
 require('fpdf.php');
 
 class PDF extends FPDF {
@@ -16,12 +13,12 @@ class PDF extends FPDF {
   }
 }
 
+$filename = $_POST['event_id'] . '.pdf';
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
-for($i=1;$i<=40;$i++)
-    $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-$pdf->Output($filename,'D');
+for($i=1;$i<=40;$i++) $pdf->Cell(0,10,'Printing line number '.$i,0,1);
 
+$pdf->Output($filename,'D');
 ?>
