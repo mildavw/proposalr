@@ -21,5 +21,7 @@ function openDateSpinner(target) {
   SpinningWheel.open();
 }
 
-$('.date').focus(function() {openDateSpinner(this);});
-$('.date').attr('readonly','readonly');
+$(function() {
+  $('.date').focus(function() {openDateSpinner(this);});
+  $('.date').attr('readonly','readonly');
+});
