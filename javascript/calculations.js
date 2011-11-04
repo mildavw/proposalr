@@ -23,7 +23,7 @@ function calc_option_date() {
   now = new Date();
   two_weeks = new Date(now.getTime() + (14 * 24 * 60 * 60 * 1000));
   var result = date_for_display(two_weeks);
-  set_pmt_date('option_date', result);
+  $('#option_date').val(result);
 }
 
 function calc_payments(n) {
