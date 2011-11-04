@@ -1,7 +1,7 @@
 $(function(){
-  $('input[name=option_date]').parent().append('<button onclick="calc_option_date()">Calculate</button>');
-  $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_payments(1);">Calculate 2</button>');
-  $('input[name=qrtly_pmt]').parent().append('<button onclick="calc_payments(3);">Calculate 4</button>');
+  $('#option_date').parent().append('<button onclick="calc_option_date()">Calculate</button>');
+  $('#payment_amount').parent().append('<button onclick="calc_payments(1);">Calculate 2</button>');
+  $('#payment_amount').parent().append('<button onclick="calc_payments(3);">Calculate 4</button>');
   $('#setup legend').click(function() {$(this).siblings().toggle();});
 });
 
@@ -27,21 +27,17 @@ function calc_option_date() {
 }
 
 function calc_payments(n) {
-  var fee = parseFloat($('input[name=flat_fee]').val());
-  var deposit = parseFloat($('input[name=due_on_sign]').val());
+  var fee = parseFloat($('#flat_fee').val());
+  var deposit = parseFloat($('#due_upon_signing').val());
   if (isNaN(fee) || isNaN(deposit)) {
     alert('Please enter flat fee and due upon signing.');
   } else if (deposit > fee) {
     alert("Deposit can't be larger than flat fee.");
   } else {
     var payment = (fee - deposit) / n;
-    $('input[name=qrtly_pmt]').val(parseFloat(payment).toFixed(2));
+    $('#payment_amount').val(parseFloat(payment).toFixed(2));
     calc_payment_dates(n);
   }
-}
-
-function set_pmt_date(target, date) {
-  $('input[name=' + target + ']').val(date);
 }
 
 function today() { // can spy on this
@@ -50,7 +46,7 @@ function today() { // can spy on this
 
 function calc_payment_dates(n) {
   var wedding_date = $('#wedding_date').val();
-  if (wedding_date == '') {
+  if (wedding_date === '') {
     alert('Please set a wedding date.');
   } else {
     var start = today();
@@ -60,9 +56,9 @@ function calc_payment_dates(n) {
     if (end - results[i] < 14 * 24 * 60 * 60 * 1000) {
       results[i] = '14 days prior to the event';
     }
-    set_pmt_date('pmt_date_1', results[0] ? date_for_display(results[0]) : '');
-    set_pmt_date('pmt_date_2', results[1] ? date_for_display(results[1]) : '');
-    set_pmt_date('pmt_date_3', results[2] ? date_for_display(results[2]) : '');
+    $('#'+'payment_date_1').val( results[0] ? date_for_display(results[0]) : '');
+    $('#'+'payment_date_2').val( results[1] ? date_for_display(results[1]) : '');
+    $('#'+'payment_date_3').val( results[2] ? date_for_display(results[2]) : '');
   }
 }
 
