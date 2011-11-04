@@ -15,8 +15,8 @@ function openDateSpinner(target) {
   SpinningWheel.addSlot(days, 'right', now.getDate());
   SpinningWheel.addSlot(years, 'right', now.getFullYear());
   SpinningWheel.setDoneAction(function() {
-    var results = SpinningWheel.getSelectedValues().values.join(' ');
-    $(target).val(results);
+    var results = SpinningWheel.getSelectedValues().values;
+    $(target).val(results[0] + ' ' + results[1] + ', ' + results[2]);
   });
   SpinningWheel.open();
 }

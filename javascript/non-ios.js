@@ -3,5 +3,5 @@ $('head').append('<script type="text/javascript" src="javascript/jquery-ui-1.8.1
 
 $( function () {
   $('.date').datepicker();
-  $('.date').datepicker( "option", "dateFormat", 'M d yy' );
+  $('.date').datepicker( "option", "dateFormat", 'M d, yy' );
 });
