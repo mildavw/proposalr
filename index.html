@@ -13,9 +13,10 @@
 </head>
 
 <body>
+
 <div id='setup' style='display:block'>
   <p class="edgeToEdge formButtons">
-    <button onclick='$("#setup").hide();preview();$("#preview").show();'>Review Content</button>
+    <button onclick='pre_preview();preview();post_preview();$("#setup").hide();$("#preview").show();'>Review Content</button>
   </p>
 </div>
 
@@ -42,5 +43,6 @@
   var os_script = (navigator.userAgent.match(/iPhone|iPad/i)) ? 'ios' : 'non-ios';
   document.write('<script type="text/javascript" src="javascript/'+os_script+'.js"><\/script>')
 </script>
+
 </body>
 </html>

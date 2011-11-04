@@ -5,6 +5,20 @@ $(function(){
   $('#setup legend').click(function() {$(this).siblings().toggle();});
 });
 
+function pre_preview() {
+  // Stick any calculations that need to run before preview here.
+}
+
+function post_preview() {
+  var event_id = [
+      $('#bride_last').val(),
+      $('#groom_last').val(),
+      underscore($('#bride_last').val())
+  ].join('-');
+  var insert = '<input class="hidden" name="event_id" value="'+event_id+'"/>';
+  $('#preview p').before(insert);
+}
+
 function calc_option_date() {
   now = new Date();
   two_weeks = new Date(now.getTime() + (14 * 24 * 60 * 60 * 1000));
