@@ -60,11 +60,11 @@ fields.Services = {
 };
 
 fields.Fees = {
-  'Option Date':      {type: 'date'},
   'Flat Fee':         {attributes: {pattern:'[0-9]*'}},
-  'Due Upon Signing': {attributes: {pattern:'[0-9]*'}},
+  'Option Date':      {type: 'date'},
   'Payment Amount': {},
-  'Payment Date 1': {},
+  'Payment Date 1': {attributes: {readonly:'readonly', value:'Due upon signing'}},
   'Payment Date 2': {},
-  'Payment Date 3': {}
+  'Payment Date 3': {},
+  'Payment Date 4': {}
 };

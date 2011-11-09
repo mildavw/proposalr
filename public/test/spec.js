@@ -43,29 +43,29 @@ describe("Main", function() {
     beforeEach(function() {
       var today = new Date(2011, 0, 1);
       spyOn(window, 'today').andCallFake(function() {return today;});
-      spyOn(window, 'set_pmt_date');
+      spyOn(window, 'set_payment_dates');
     });
 
     it('returns proper date strings to display given a wedding date and the number of payments', function() {
       var event_date = 'Jan 1 2012';
       spyOn($.fn, 'val').andCallFake(function() {return event_date;});
-      calc_payment_dates(3);
-      expect(set_pmt_date).toHaveBeenCalledWith(['pmt_date_1','Apr 1 2011'], ['pmt_date_2','Jul 1 2011'], ['pmt_date_3','Oct 1 2011']);
+      calc_payment_dates(4);
+      expect(set_payment_dates).toHaveBeenCalledWith([new Date(2011, 3, 1), new Date(2011, 6, 1), new Date(2011, 9, 1)])
     });
 
     it('returns "14 days before event" display given a wedding date that is sufficiently soon', function() {
       var event_date = 'Jan 24 2011';
       spyOn($.fn, 'val').andCallFake(function() {return event_date;});
-      calc_payment_dates(1);
-      expect(set_pmt_date).toHaveBeenCalledWith(['pmt_date_1','14 days prior to the event'], ['pmt_date_2',''], ['pmt_date_3','']);
+      calc_payment_dates(2);
+      expect(set_payment_dates).toHaveBeenCalledWith(['14 days prior to the event', null, null])
     });
 
     it('returns "14 days before event" display given a wedding date that is sufficiently soon', function() {
       var event_date = 'Jan 24 2011';
       spyOn($.fn, 'val').andCallFake(function() {return event_date;});
-      calc_payment_dates(3);
+      calc_payment_dates(4);
       var message = '14 days prior to the event';
-      expect(set_pmt_date).toHaveBeenCalledWith(['pmt_date_1','Jan 1 2011'], ['pmt_date_2',message], ['pmt_date_3',message]);
+      expect(set_payment_dates).toHaveBeenCalledWith([message, message, message]);
     });
 
   });

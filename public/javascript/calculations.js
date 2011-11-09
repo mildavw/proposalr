@@ -1,7 +1,7 @@
 $(function(){
   $('#option_date').parent().append('<button onclick="calc_option_date()">Calculate</button>');
-  $('#payment_amount').parent().append('<button onclick="calc_payments(1);">Calculate 2</button>');
-  $('#payment_amount').parent().append('<button onclick="calc_payments(3);">Calculate 4</button>');
+  $('#payment_amount').parent().append('<br/><button onclick="calc_payments(2);">Calculate 2</button>');
+  $('#payment_amount').parent().append('<button onclick="calc_payments(4);">Calculate 4</button>');
   $('#setup legend').click(function() {$(this).siblings().toggle();});
 });
 
@@ -28,13 +28,10 @@ function calc_option_date() {
 
 function calc_payments(n) {
   var fee = parseFloat($('#flat_fee').val());
-  var deposit = parseFloat($('#due_upon_signing').val());
-  if (isNaN(fee) || isNaN(deposit)) {
-    alert('Please enter flat fee and due upon signing.');
-  } else if (deposit > fee) {
-    alert("Deposit can't be larger than flat fee.");
+  if (isNaN(fee)) {
+    alert('Please enter flat fee.');
   } else {
-    var payment = (fee - deposit) / n;
+    var payment = fee / n;
     $('#payment_amount').val(parseFloat(payment).toFixed(2));
     calc_payment_dates(n);
   }
@@ -51,15 +48,19 @@ function calc_payment_dates(n) {
   } else {
     var start = today();
     var end = parse_date(wedding_date);
-    var results = n_payment_dates(start, end, n);
+    var results = n_payment_dates(start, end, n-1);
     for (var i=n-1;i>-1;i--)
     if (end - results[i] < 14 * 24 * 60 * 60 * 1000) {
       results[i] = '14 days prior to the event';
     }
-    $('#'+'payment_date_1').val( results[0] ? date_for_display(results[0]) : '');
-    $('#'+'payment_date_2').val( results[1] ? date_for_display(results[1]) : '');
-    $('#'+'payment_date_3').val( results[2] ? date_for_display(results[2]) : '');
+    set_payment_dates(results);
   }
+}
+
+function set_payment_dates(dates) {
+  $('#'+'payment_date_2').val( dates[0] ? date_for_display(dates[0]) : '' );
+  $('#'+'payment_date_3').val( dates[1] ? date_for_display(dates[1]) : '' );
+  $('#'+'payment_date_4').val( dates[2] ? date_for_display(dates[2]) : '' );
 }
 
 function n_payment_dates(start_date, end_date, n) {
