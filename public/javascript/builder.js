@@ -131,7 +131,7 @@ function preview() {
       $('#output_' + underscore(k)).html( new_content[k].text );
     }
   } else {
-    meta = [];
+    var meta = [];
     insert = '<dl class="edgeToEdge formFields">';
     for (var m in new_content) {
       var nick = 'output_' + underscore(m);
@@ -142,7 +142,6 @@ function preview() {
     for (var n in meta) {
       insert += '<input type="hidden" name="'+meta[n].nickname+'_sort" value="'+meta[n].sort+'"/>';
       insert += '<input type="hidden" name="'+meta[n].nickname+'_title" value="'+meta[n].title+'"/>';
-      index++;
     }
     $('#preview p').before(insert);
   }
