@@ -14,6 +14,7 @@
 <form method="POST" action='/'>
   <div id='setup' style='display:block'>
     <p class="edgeToEdge formButtons">
+      <button onclick="fill_in_sample_data());">Sample</button>
       <button onclick='preview();$("#setup").hide();$("#preview").show(); return false;'>Review Content</button>
     </p>
   </div>
@@ -31,6 +32,7 @@
 </div>
 
 <script type="text/javascript" src="javascript/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="javascript/jquery.json-2.3.min.js"></script>
 <script type="text/javascript" src="javascript/utilities.js"></script>
 <script type="text/javascript" src="javascript/content.js"></script>
 <script type="text/javascript" src="javascript/fields.js"></script>
