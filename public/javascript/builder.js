@@ -144,8 +144,8 @@ function update_content_preview(new_content) {
     for (var j in new_content) {
       var nick = 'output_' + underscore(j);
       insert += textarea(nick, new_content[j].title, {}, new_content[j].text);
-      meta[nick] = {sort: j, title: new_content[j].title,
-                style: new_content[j].style, attributes: new_content[j].attributes};
+      meta[nick] = {sort: j, title: new_content[j].title, style: new_content[j].style};
+      for (var n in new_content[j].attributes) meta[nick][n] = new_content[j].attributes[n];
     }
     insert += '</dl>';
     for (var k in meta) {

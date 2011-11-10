@@ -6,7 +6,7 @@ text += "«address»\n";
 text += "«city» «state», «zip»\n";
 text += "«phone»\n";
 text += "«email»";
-content.push({title:'address', text:text, attributes:{show_title:false}});
+content.push({title:'address', text:text, attributes:{hide_title:true}});
 
 text = "EJP Events is pleased to submit a planning proposal\n";
 text += "for the wedding of\n";
@@ -15,7 +15,7 @@ text += "to\n";
 text += "«groom_first» «groom_last»\n";
 text += "on/in «wedding_date»\n";
 text += "at «wedding_loc»";
-content.push({title:'abstract', text:text, style:{'text-align':'center'}, attributes:{'show_title':false}});
+content.push({title:'abstract', text:text, style:'text-align:center', attributes:{hide_title:true}});
 
 content.push({title:'Wedding Design and Coordination', text:"Hold initial design meeting with «bride_first», «groom_first», and any other invited parties. Generate ideas and explore preferences for event atmosphere, colors and textures, formality level, paper and printing, menu and catering, sounds and visuals, floral and décor, ceremony and reception layout, and wedding attire. Research and provide documents, photos, and renderings from EJP Events design library. Total of (6#spellout) in-office consultation meetings, scheduled at client’s convenience, to solidify wedding design plans as well as administer other services described in this planning proposal."});
 
@@ -49,11 +49,11 @@ text += "If an act of God, such as a fire, flood, earthquake or other natural ca
 text += "By signing this form, Client hereby grants to EJP Events and its legal representatives and assigns, the irrevocable and unrestricted right to use and publish social media updates (including photographs and video) related to, and of, this event for editorial, trade, advertising, art, and any other purpose and in any manner and medium; to alter the same without restriction; and to use Client’s name in connection therewith. Client hereby releases EJP Events and its legal representatives and assigns from all claims and liability relating to said photographs and social media updates.\n\n";
 text += "The parties agree that the venue for any dispute arising under or in relation to this contract shall lie only in the City of Portland, Multnomah County, State of Oregon. In the event of such a dispute, the non-prevailing party shall be responsible for any judgment awarded plus the reimbursement of all reasonable attorney’s fees of the prevailing party.\n\n";
 text += "This contract constitutes an offer of services and may not be changed, annotated, or lined out without our mutual agreement. These services are sold as a package and Client’s decision to make partial use of package shall not constitute partial payment. Any changes must be submitted in writing as a separate contract and signed by all parties.  This offer is good until «option_date» or until a first option has been declined; if not confirmed by a payment, the offer may be revoked at EJP Events’ discretion.";
-content.push({title:'fine_print', text:text, style:{'font-size':'.7em'}, attributes: {show_title:false}});
+content.push({title:'fine_print', text:text, style:'font-size:0.7em', attributes: {hide_title:true}});
 
 text = "«salutation», if you understand and agree to these arrangements, please sign one copy of this letter and return it to me along with your check for $«payment_amount». Payment may also be handled by credit card, in which case, please sign one copy of this letter and check the box indicating that you wish to receive a credit card authorization form.\n\n";
 text += "I wish you all the happiness in the world, and look forward to working with you to make your wedding a joyful and stress-free occasion.\n\n";
 text += "Accepted and agreed to by:\n\n";
-content.push({title:'salutation', text:text, attributes: {show_title:false}});
+content.push({title:'salutation', text:text, attributes: {hide_title:true}});
 
-content.push({title:'signature_line', text:"«bride_first» «bride_last»\nor «groom_first» «groom_last»", attributes: {show_title:false}});
+content.push({title:'signature_line', text:"«bride_first» «bride_last»\nor «groom_first» «groom_last»", attributes: {hide_title:true}});
