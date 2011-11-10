@@ -109,6 +109,7 @@ function hash_add_checked(hash, elements) {
 }
 
 function preview() {
+  pre_preview();
   var substitutions = {};
   substitutions = hash_add(substitutions, $('#setup input[type=text]'));
   substitutions = hash_add(substitutions, $('#setup textarea'));
@@ -120,21 +121,30 @@ function preview() {
     var reg = new RegExp('«'+j+'»', 'gim');
     if (substitutions[j] !== '') {
       for (var i in new_content) {
-        new_content[i] = new_content[i].replace(reg,substitutions[j]);
+        new_content[i].text = new_content[i].text.replace(reg,substitutions[j]);
       }
     }
   }
 
   if ($('#preview dt').length > 0) {
     for (var k in new_content) {
-      $('#' + underscore(k)).html( new_content[k] );
+      $('#output_' + underscore(k)).html( new_content[k].text );
     }
   } else {
+    meta = [];
     insert = '<dl class="edgeToEdge formFields">';
     for (var m in new_content) {
-      insert += '<dt><label for="'+underscore(m)+'">' + m + '</label></dt>';
-      insert += '<dd><textarea cols="60" rows="10" name="name" id="'+underscore(m)+'">' + new_content[m] + '</textarea></dd>';
+      var nick = 'output_' + underscore(m);
+      insert += textarea(nick, m, {}, new_content[m].text);
+      meta.push({nickname: nick, sort: new_content[m].sort, title: m});
     }
-    $('#preview p').before(insert + '</dl>');
+    insert += '</dl>';
+    for (var n in meta) {
+      insert += '<input type="hidden" name="'+meta[n].nickname+'_sort" value="'+meta[n].sort+'"/>';
+      insert += '<input type="hidden" name="'+meta[n].nickname+'_title" value="'+meta[n].title+'"/>';
+      index++;
+    }
+    $('#preview p').before(insert);
   }
+  post_preview();
 }
