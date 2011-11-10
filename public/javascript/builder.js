@@ -149,7 +149,7 @@ function update_content_preview(new_content) {
     }
     insert += '</dl>';
     for (var k in meta) {
-      insert += '<input type="hidden" name="'+k+'_meta" value="'+$.toJSON(meta[k])+'"/>';
+      insert += '<input type="hidden" name="'+k+'_meta" value="'+escape($.toJSON(meta[k]))+'"/>';
     }
     $('#preview p').before(insert);
   }
