@@ -36,10 +36,11 @@ function checkbox_group_item(nickname,label,prefix,attributes) {
 }
 function checkbox_group(prefix, label, attributes, group){
   var html = '<dt>'+label+'</dt><dd>';
-  for (var item in group) {
-    var options = group[item];
-    var nickname = options.rename || underscore(item);
-    html += checkbox_group_item(nickname, item, prefix, options.attributes);
+  var ilen = group.length;
+  for (var i = 0; i < ilen; i++) {
+    var item = group[i];
+    var nickname = item.rename || underscore(item.label);
+    html += checkbox_group_item(nickname, item.label, prefix, item.attributes);
   }
   html += '</dd>';
   return html;
@@ -54,26 +55,28 @@ function textarea(nickname, label, attributes, text) {
 
 function build_form() {
   var html = '';
-  for (var section in fields) {
-    var inputs = fields[section];
+  var ilen = fields.length;
+  for (var i = 0; i < ilen; i++) {
     html += '<fieldset class="edgeToEdge">';
-    html += '<legend>'+section+'</legend>';
+    html += '<legend>'+fields[i].label+'</legend>';
     html += '<dl class="edgeToEdge formFields" style="display:none;">';
-    for (var label in inputs) {
-      var options = inputs[label];
-      var nickname = options.rename || underscore(label);
-      switch(options.type) {
+    var inputs = fields[i].inputs;
+    var jlen = inputs.length;
+    for (var j = 0; j < jlen; j++) {
+      input = inputs[j];
+      var nickname = input.rename || underscore(input.label);
+      switch(input.type) {
         case 'date':
-          html += date_field(nickname, label, options.attributes);
+          html += date_field(nickname, input.label, input.attributes);
           break;
         case 'checkbox_group':
-          html += checkbox_group(nickname, label, options.attributes, options.group);
+          html += checkbox_group(nickname, input.label, input.attributes, input.group);
           break;
         case 'textarea':
-          html += textarea(nickname, label, options.attributes, options.text);
+          html += textarea(nickname, input.label, input.attributes, input.text);
           break;
         default: // text input
-          html += text_field(nickname, label, options.attributes);
+          html += text_field(nickname, input.label, input.attributes);
       }
     }
     html += '</dl></fieldset>';
@@ -108,42 +111,54 @@ function hash_add_checked(hash, elements) {
   return hash;
 }
 
-function preview() {
-  pre_preview();
+function build_substitution_hash() {
   var substitutions = {};
   substitutions = hash_add(substitutions, $('#setup input[type=text]'));
   substitutions = hash_add(substitutions, $('#setup textarea'));
   substitutions = hash_add(substitutions, $('#setup input[type=hidden]'));
   substitutions = hash_add_checked(substitutions, $('#setup input:checked'));
+  return substitutions;
+}
 
-  var new_content = jQuery.extend({}, content);
+function make_substitutions_in_content(substitutions) {
+  var new_content = jQuery.extend([], content);
   for (var j in substitutions) {
     var reg = new RegExp('«'+j+'»', 'gim');
     if (substitutions[j] !== '') {
-      for (var i in new_content) {
+      for (var i=0;i<new_content.length;i++) {
         new_content[i].text = new_content[i].text.replace(reg,substitutions[j]);
       }
     }
   }
+return new_content;
+}
 
+function update_content_preview(new_content) {
   if ($('#preview dt').length > 0) {
-    for (var k in new_content) {
-      $('#output_' + underscore(k)).html( new_content[k].text );
+    for (var i=0;i<new_content.length;i++) {
+      $('#output_' + underscore(new_content[i].title)).html( new_content[i].text );
     }
   } else {
-    var meta = [];
+    var meta = {};
     insert = '<dl class="edgeToEdge formFields">';
-    for (var m in new_content) {
-      var nick = 'output_' + underscore(m);
-      insert += textarea(nick, m, {}, new_content[m].text);
-      meta.push({nickname: nick, sort: new_content[m].sort, title: m});
+    for (var j in new_content) {
+      var nick = 'output_' + underscore(j);
+      insert += textarea(nick, new_content[j].title, {}, new_content[j].text);
+      meta[nick] = {sort: j, title: new_content[j].title,
+                style: new_content[j].style, attributes: new_content[j].attributes};
     }
     insert += '</dl>';
-    for (var n in meta) {
-      insert += '<input type="hidden" name="'+meta[n].nickname+'_sort" value="'+meta[n].sort+'"/>';
-      insert += '<input type="hidden" name="'+meta[n].nickname+'_title" value="'+meta[n].title+'"/>';
+    for (var k in meta) {
+      insert += '<input type="hidden" name="'+k+'_meta" value="'+$.toJSON(meta[k])+'"/>';
     }
     $('#preview p').before(insert);
   }
+}
+
+function preview() {
+  pre_preview();
+  var substitutions = build_substitution_hash();
+  var new_content = make_substitutions_in_content(substitutions);
+  update_content_preview(new_content);
   post_preview();
 }
