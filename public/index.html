@@ -11,20 +11,20 @@
 
 <body>
 
-<div id='setup' style='display:block'>
-  <p class="edgeToEdge formButtons">
-    <button onclick='pre_preview();preview();post_preview();$("#setup").hide();$("#preview").show();'>Review Content</button>
-  </p>
-</div>
-
-<div id="preview" style="display:none;">
-  <form method="POST" action="pdf.php">
+<form method="POST" action='/'>
+  <div id='setup' style='display:block'>
     <p class="edgeToEdge formButtons">
-      <button onclick='$("#preview").hide();$("#setup").show(); return false;'>Edit Details</button>
-      <button>Download PDF</button>
+      <button onclick='preview();$("#setup").hide();$("#preview").show(); return false;'>Review Content</button>
     </p>
-  </form>
-</div>
+  </div>
+
+  <div id="preview" style="display:none;">
+      <p class="edgeToEdge formButtons">
+        <button onclick='$("#preview").hide();$("#setup").show(); return false;'>Edit Details</button>
+        <button>Download PDF</button>
+      </p>
+  </div>
+</form>
 
 <div class="footer">
   Proposalr &copy; EJP Events, 2011
