@@ -1,7 +1,8 @@
 $(function(){
-  $('#option_date').parent().append('<button onclick="calc_option_date()">Calculate</button>');
-  $('#payment_amount').parent().append('<br/><button onclick="calc_payments(2);">Calculate 2</button>');
-  $('#payment_amount').parent().append('<button onclick="calc_payments(4);">Calculate 4</button>');
+  $('#option_date').parent().append('<button onclick="calc_option_date();return false;">Calculate</button>');
+  $('#payment_amount').parent().append('<br/><button onclick="calc_payments(2);return false;">Calculate 2</button>');
+  $('#payment_amount').parent().append('<button onclick="calc_payments(4);return false;">Calculate 4</button>');
+  $('#contract_date').parent().append('<button onclick="insert_today();return false;">Today</button>');
   $('#setup legend').click(function() {$(this).siblings().toggle();});
 });
 
@@ -15,8 +16,14 @@ function post_preview() {
       $('#groom_last').val(),
       underscore($('#bride_last').val())
   ].join('-');
-  var insert = '<input class="hidden" name="event_id" value="'+event_id+'"/>';
+  var insert = '<input type="hidden" name="event_id" value="'+event_id+'"/>';
   $('#preview p').before(insert);
+}
+
+function insert_today() {
+  var today = date_for_display(new Date());
+  $('#contract_date').val(today);
+  return false;
 }
 
 function calc_option_date() {

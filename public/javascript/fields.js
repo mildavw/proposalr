@@ -22,6 +22,7 @@ fields.push({label:'Wedding',  inputs:[
 ]});
 
 fields.push({label:'Services',  inputs:[
+  {label: 'Date of Contract', type:'date', rename:'contract_date'},
   {label: '# of Consultations', rename:'num_consultations', attributes: {pattern:'[0-9]*'}},
   {label: '# of Sites', rename:'num_sites', attributes: {pattern:'[0-9]*'}},
   {label: '# of Assistants', rename:'num_assistants', attributes: {pattern:'[0-9]*'}},

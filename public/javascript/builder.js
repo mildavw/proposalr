@@ -13,6 +13,12 @@ function attributes_to_s(attributes, defaults) {
   }
   return attrs.join(' ');
 }
+function hidden_field(nickname,label,attributes,value) {
+  var attrs = attributes_to_s(attributes, {});
+  var html = "<dt style='display:none'><dt>";
+  html += "<dd style='display:none'><input type='hidden' id='"+nickname+"' name='"+nickname+"' value='"+value+"' "+attrs+"/></dd>";
+  return html;
+}
 function text_field(nickname,label,attributes) {
   var attrs = attributes_to_s(attributes, {});
   var html = "<dt><label for='"+nickname+"'>"+label+"</label></dt>";
@@ -135,21 +141,31 @@ return new_content;
 
 function update_content_preview(new_content) {
   if ($('#preview dt').length > 0) {
-    for (var i=0;i<new_content.length;i++) {
-      $('#output_' + underscore(new_content[i].title)).html( new_content[i].text );
+    var ilen = new_content.length;
+    for (var i=0;i<ilen;i++) {
+      if (!new_content[i].hide_preview) {
+        $('#output_'+i).html( new_content[i].text );
+      }
     }
   } else {
-    var meta = {};
+    var meta = [];
     insert = '<dl class="edgeToEdge formFields">';
-    for (var j in new_content) {
-      var nick = 'output_' + underscore(j);
-      insert += textarea(nick, new_content[j].title, {}, new_content[j].text);
-      meta[nick] = {sort: j, title: new_content[j].title, style: new_content[j].style};
-      for (var n in new_content[j].attributes) meta[nick][n] = new_content[j].attributes[n];
+    var jlen = new_content.length;
+    for (var j=0;j<jlen;j++) {
+      var item = new_content[j];
+      var nick = 'output_'+j;
+      if (item.hide_preview) {
+        insert += hidden_field(nick, item.title, {}, item.text);
+      } else {
+        insert += textarea(nick, item.title, {}, item.text);
+      }
+      meta_info = {sort:j, title:item.title, style:item.style};
+      for (var n in item.attributes) meta_info[n] = item.attributes[n];
+      meta.push(meta_info);
     }
     insert += '</dl>';
-    for (var k in meta) {
-      insert += '<input type="hidden" name="'+k+'_meta" value="'+escape($.toJSON(meta[k]))+'"/>';
+    for (var k in meta){
+      insert += '<input type="hidden" name="output_'+k+'_meta" value="'+escape($.toJSON(meta[k]))+'"/>';
     }
     $('#preview p').before(insert);
   }

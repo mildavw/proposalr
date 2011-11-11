@@ -1,6 +1,11 @@
 content = [];
 
-var text = "«bride_first» «bride_last»\n";
+var text = '<img src="images/EJP Events Logo.png" width=50%/>';
+content.push({title:'top_image', hide_preview:true, attributes:{hide_title:true}, text:text});
+
+content.push({title:'contract_date', style:'text-align:right', attributes:{hide_title:true}, text:'«contract_date»'});
+
+text = "«bride_first» «bride_last»\n";
 text += "and «groom_first» «groom_last»\n";
 text += "«address»\n";
 text += "«city» «state», «zip»\n";
@@ -33,10 +38,10 @@ content.push({title:'Post-Wedding', text:"Distribute vendor payments and/or tip 
 
 text = "All travel is included within a 1 hour radius of Portland. Additional mileage will be billed at the current IRS rate. If drivetime to your event exceeds 1.5 hours one-way, overnight lodging is required, and you agree to provide or reimburse lodging for all EJP Events staff adjacent to the wedding site for each night preceding a staff work day, as well as the night of the event. Our role will be that of advisor, and we will present you with options for the above tasks and services. You will make the actual selections, sign contracts with, and pay your service providers, then we will implement and coordinate your selection. Please inform your vendors that you are working with EJP Events.";
 text += "\n";
-text += "For our work, we will charge a flat fee of $«flat_fee», as follows:";
-text += "• $«payment_amount» upon signature of this letter;";
-text += "• $«payment_amount» each due on «payment_date_2», «payment_date_3», and «payment_date_4».";
-text += "\n";
+text += "For our work, we will charge a flat fee of $«flat_fee», as follows:<ul>";
+text += "<li>$«payment_amount» upon signature of this letter;</li>";
+text += "<li>$«payment_amount» each due on «payment_date_2», «payment_date_3», and «payment_date_4».</li>";
+text += "</ul>";
 text += "Work on this project shall not begin until both a signed copy of this contract and first payment are received. If any of the payments are not received within three calendar days of the due date, we reserve the right to cease work on your wedding.";
 text += "\n";
 text += "This proposal is based on consultation and coordination for a wedding of approximately «num_people» people, involving «num_locations» location(s). Should the aforementioned numbers or tasks increase, affecting the staff necessary for your event, additional fees shall apply at the overtime rate of $75/hour. Labor (e.g., setup/teardown/janitorial), production, and raw materials are not included in the stated fees. A 5% processing fee may be added to vendor payments or materials reimbursements paid with a credit card, to cover transaction fees incurred by EJP Events.";
