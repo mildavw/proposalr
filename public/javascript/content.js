@@ -58,7 +58,9 @@ content.push({title:'fine_print', text:text, style:'font-size:0.7em', attributes
 
 text = "«salutation», if you understand and agree to these arrangements, please sign one copy of this letter and return it to me along with your check for $«payment_amount». Payment may also be handled by credit card, in which case, please sign one copy of this letter and check the box indicating that you wish to receive a credit card authorization form.\n\n";
 text += "I wish you all the happiness in the world, and look forward to working with you to make your wedding a joyful and stress-free occasion.\n\n";
-text += "Accepted and agreed to by:\n\n";
+text += "Accepted and agreed to by:\n\n\n";
+text += "<div style='float:left'>_____________________________________\n«bride_first» «bride_last»\nor «groom_first» «groom_last»";
+text += "\n\n\n\n_____________________________________<br/>Date</div>";
+text += "<div style='float:right'>_____________________________________\nEmee Pumarega, CMP<br/>Owner, EJP Events";
+text += "\n\n\n\n_____________________________________<br/>Date</div>";
 content.push({title:'salutation', text:text, attributes: {hide_title:true}});
-
-content.push({title:'signature_line', text:"«bride_first» «bride_last»\nor «groom_first» «groom_last»", attributes: {hide_title:true}});
