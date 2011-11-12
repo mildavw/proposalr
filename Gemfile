@@ -5,5 +5,6 @@ gem "pdfkit"
 gem "json"
 
 group :development do
+  gem 'heroku'
   gem 'shotgun'
 end
