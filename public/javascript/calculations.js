@@ -6,18 +6,22 @@ $(function(){
   $('#setup legend').click(function() {$(this).siblings().toggle();});
 });
 
+function filename(ext) {
+  var event_id = [
+    $('#bride_last').val(),
+    $('#groom_last').val(),
+    underscore($('#wedding_date').val())
+  ].join('-');
+  if (event_id == '--') event_id = 'untitled';
+  return event_id + '.' + ext;
+}
+
 function pre_preview() {
   // Stick any calculations that need to run before preview here.
 }
 
 function post_preview() {
-  var event_id = [
-      $('#bride_last').val(),
-      $('#groom_last').val(),
-      underscore($('#bride_last').val())
-  ].join('-');
-  var insert = '<input type="hidden" name="event_id" value="'+event_id+'"/>';
-  $('#preview p').before(insert);
+  // Stick any calculations that need to run after preview is built here.
 }
 
 function insert_today() {
