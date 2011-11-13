@@ -17,6 +17,7 @@ function filename(ext) {
     underscore($('#wedding_date').val())
   ].join('-');
   if (event_id == '--') event_id = 'untitled';
+  if (ext == '') return event_id;
   return event_id + '.' + ext;
 }
 

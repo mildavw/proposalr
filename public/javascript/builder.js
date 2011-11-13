@@ -23,17 +23,17 @@ function hide_message() {
 }
 
 function email_pdf() {
-  var email = prompt('Send PDF to the following address:', default_email());
-  $.ajax({
-    type: 'POST',
-    url: 'email/' + filename('pdf'),
-    data: $('form').serialize() + escape('&to_email='+email),
-    dataType: 'json'
-  })
-  .success(function() { show_temporary_message('Mail sent.'); })
-  .error(function(data) { show_message('Error sending email: ' + data.message); });
-  show_message('Sending...');
-  return false;
+  var email_to = prompt('Send PDF to the following address:', default_email());
+  if ($('#email_to').length > 0) {
+    $('#email_to').val(escape(email_to));
+  } else {
+    var html = '<input type="hidden" name="email_to" id="email_to" value="'+escape(email_to)+'"/>';
+    $('#preview p').eq(0).before(html);
+  }
+  $('form').attr('target','_blank');
+  $('form').attr('action','email/' + filename(''));
+  console.info('email/' + filename(''));
+  return true;
 }
 
 function edit_details() {
