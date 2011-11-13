@@ -2,6 +2,65 @@ $(function(){
   build_form();
 });
 
+function show_message(msg) {
+  $('#message').css('color:black;font-weight:bold');
+  $('#message').html(msg);
+}
+
+function show_temporary_message(msg) {
+  $('#message').css('color:black;font-weight:bold');
+  $('#message').html(msg);
+  setTimeout(hide_message, 3000);
+}
+
+function show_error_message(msg) {
+  $('#message').css('color:red;font-weight:bold');
+  $('#message').html(msg);
+}
+
+function hide_message() {
+  $('#message').html('');
+}
+
+function email_pdf() {
+  var email = prompt('Send PDF to the following address:', default_email());
+  $.ajax({
+    type: 'POST',
+    url: 'email/' + filename('pdf'),
+    data: $('form').serialize() + escape('&to_email='+email),
+    dataType: 'json'
+  })
+  .success(function() { show_temporary_message('Mail sent.'); })
+  .error(function(data) { show_message('Error sending email: ' + data.message); });
+  show_message('Sending...');
+  return false;
+}
+
+function edit_details() {
+  $("#preview").hide();
+  $("#setup").show();
+  return false;
+}
+
+function preview_as_html() {
+  $('form').attr('target','_blank');
+  $('form').attr('action',filename('html'));
+  return true;
+}
+
+function download_pdf() {
+  $('form').removeAttr('target');
+  $('form').attr('action',filename('pdf'));
+  return true;
+}
+
+function review_content() {
+  preview();
+  $("#setup").hide();
+  $("#preview").show();
+  return false;
+}
+
 function attributes_to_s(attributes, defaults) {
   if (typeof(attributes) == 'undefined') attributes = {};
   for (var i in defaults) {
@@ -167,7 +226,7 @@ function update_content_preview(new_content) {
     for (var k in meta){
       insert += '<input type="hidden" name="output_'+k+'_meta" value="'+escape($.toJSON(meta[k]))+'"/>';
     }
-    $('#preview p').before(insert);
+    $('#preview p').eq(0).before(insert);
   }
 }
 

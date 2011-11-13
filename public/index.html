@@ -15,20 +15,18 @@
   <div id='setup' style='display:block'>
     <p class="edgeToEdge formButtons">
       <!-- <button onclick="fill_in_sample_data());">Sample</button> -->
-      <button onclick='preview();$("#setup").hide();$("#preview").show(); return false;'>Review Content</button>
+      <button onclick='return review_content()'>Review Content</button>
     </p>
   </div>
 
   <div id="preview" style="display:none;">
-      <p class="edgeToEdge formButtons">
-        <button onclick='$("#preview").hide();$("#setup").show(); return false;'>Edit Details</button>
-        <button
-          onclick="$('form').attr('target','_blank'); $('form').attr('action',filename('html')); return true">
-          Preview</button>
-        <button
-          onclick="$('form').removeAttr('target'); $('form').attr('action',filename('pdf')); return true;">
-          Download PDF</button>
-      </p>
+    <p class="edgeToEdge formButtons">
+      <button onclick='return edit_details()'>Edit Details</button>
+      <button onclick="return preview_as_html()">Preview</button>
+      <button onclick="return download_pdf()">Download PDF</button>
+      <button onclick="return email_pdf()">Email PDF</button>
+    </p>
+    <p id="message" class="edgeToEdge" style='text-align:right;'></p>
   </div>
 </form>
 

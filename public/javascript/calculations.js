@@ -6,6 +6,10 @@ $(function(){
   $('#setup legend').click(function() {$(this).siblings().toggle();});
 });
 
+function default_email() {
+  return 'dwmiller@umich.edu';
+}
+
 function filename(ext) {
   var event_id = [
     $('#bride_last').val(),
