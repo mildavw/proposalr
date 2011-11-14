@@ -129,7 +129,7 @@ function build_form() {
     var jlen = inputs.length;
     for (var j = 0; j < jlen; j++) {
       input = inputs[j];
-      var nickname = input.rename || underscore(input.label);
+      var nickname = 'in_' + (input.rename || underscore(input.label));
       switch(input.type) {
         case 'date':
           html += date_field(nickname, input.label, input.attributes);
@@ -188,7 +188,7 @@ function build_substitution_hash() {
 function make_substitutions_in_content(substitutions) {
   var new_content = jQuery.extend([], content);
   for (var j in substitutions) {
-    var reg = new RegExp('«'+j+'»', 'gim');
+    var reg = new RegExp('«'+j.replace(/^in_/,'')+'»', 'gim');
     if (substitutions[j] !== '') {
       for (var i=0;i<new_content.length;i++) {
         new_content[i].text = new_content[i].text.replace(reg,substitutions[j]);
