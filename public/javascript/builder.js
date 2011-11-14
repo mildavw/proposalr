@@ -22,6 +22,12 @@ function hide_message() {
   $('#message').html('');
 }
 
+function save_all() {
+  $('form').attr('target','_blank');
+  $('form').attr('action','save/' + filename(''));
+  return true;
+}
+
 function email_pdf() {
   var email_to = prompt('Send PDF to the following address:', default_email());
   if ($('#email_to').length > 0) {
@@ -32,7 +38,6 @@ function email_pdf() {
   }
   $('form').attr('target','_blank');
   $('form').attr('action','email/' + filename(''));
-  console.info('email/' + filename(''));
   return true;
 }
 
