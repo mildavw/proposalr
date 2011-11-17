@@ -49,14 +49,15 @@ function edit_details() {
 
 function preview_as_html() {
   $('form').attr('target','_blank');
-  $('form').attr('action',filename('html'));
+  $('form').attr('action', filename('html'));
   return true;
 }
 
 function download_pdf() {
   $('form').removeAttr('target');
-  $('form').attr('action',filename('pdf'));
-  return true;
+  $('form').attr('action', filename('pdf'));
+  console.info($('form'));
+  return false;
 }
 
 function review_content() {
@@ -134,7 +135,7 @@ function build_form() {
     var jlen = inputs.length;
     for (var j = 0; j < jlen; j++) {
       input = inputs[j];
-      var nickname = 'in_' + (input.rename || underscore(input.label));
+      var nickname = (input.rename || underscore(input.label));
       switch(input.type) {
         case 'date':
           html += date_field(nickname, input.label, input.attributes);
