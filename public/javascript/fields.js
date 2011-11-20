@@ -45,7 +45,7 @@ fields.push({label:'Services',  inputs:[
     {label: 'Transportation'}
     ]
   },
-  {label: 'Elements', type:'textarea', text:'Work with vendors and oversee the production of design elements, such as printed materials, attire elements, and décor details.'},
+  {label: 'Elements', rename:'design_elements', type:'textarea', text:'Work with vendors and oversee the production of design elements, such as printed materials, attire elements, and décor details.'},
   {label: 'Avenues/Methods', type:'textarea', text:"Suggest avenues and methods that will  create/emphasize/ensure INSERT CLIENT’S GOTTA-HAVES HERE."},
   {label: 'Will Oversee', type:'checkbox_group', group: [
       {label: 'Tents'},
