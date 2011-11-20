@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+  <title>EJP Events Proposalr</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
+  <link rel="stylesheet" href="css/iphone.css" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+</head>
+
+<body>
+
+<div id='index' style='display:block'>
+  <a href='#' onclick='$("#new").toggle(); $("#index").toggle(); return false;'>New proposal</a>
+  <table border=0>
+    <% @docs.each do |doc| %>
+      <tr id='doc_<%= doc.id %>'>
+        <td><a href='#' onclick='return load_doc(<%= doc.id %>)'><%= doc.filename %></a></td>
+        <td><a href='#' onclick='return delete_doc(<%= doc.id %>,confirm("You sure?"));'>del</a></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div id='new' style='display:none'>
+  <a href='#' onclick='$("#new").toggle(); $("#index").toggle(); return false;'><< back</a><br/>
+  <form method="POST" action='/'>
+    <div id='setup' style='display:block'>
+      <p class="edgeToEdge formButtons">
+        <!-- <button onclick="fill_in_sample_data());">Sample</button> -->
+        <button onclick='return review_content()'>Review Content</button>
+      </p>
+    </div>
+
+    <div id="preview" style="display:none;">
+      <p class="edgeToEdge formButtons">
+        <button onclick="return preview_as_html()">Preview</button>
+        <button onclick="return download_pdf()">Download PDF</button>
+        <button onclick="return email_pdf()">Email PDF</button><br/><br/>
+        <button onclick='return edit_details()'>Edit Details</button>
+        <button onclick='return save_all()'>Save All</button>
+      </p>
+      <p id="message" class="edgeToEdge" style='text-align:right;'></p>
+    </div>
+  </form>
+</div>
+
+<div class="footer">
+  Proposalr &copy; EJP Events, 2011
+</div>
+
+<script type="text/javascript" src="javascript/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="javascript/jquery.json-2.3.min.js"></script>
+<script type="text/javascript" src="javascript/utilities.js"></script>
+<script type="text/javascript" src="javascript/content.js"></script>
+<script type="text/javascript" src="javascript/fields.js"></script>
+<script type="text/javascript" src="javascript/builder.js"></script>
+<script type="text/javascript" src="javascript/calculations.js"></script>
+<script type="text/javascript">
+  var os_script = (navigator.userAgent.match(/iPhone|iPad/i)) ? 'ios' : 'non-ios';
+  document.write('<script type="text/javascript" src="javascript/'+os_script+'.js"><\/script>')
+</script>
+
+</body>
+</html>
