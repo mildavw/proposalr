@@ -1,3 +1,4 @@
 *.tmproj
 pdf/
 *.sqlite3
+local_email_settings.rb
