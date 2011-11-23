@@ -12,19 +12,19 @@
 <body>
 
 <div id='index' style='display:block'>
-  <a href='#' onclick='$("#new").toggle(); $("#index").toggle(); return false;'>New proposal</a>
-  <table border=0>
+  <button onclick='$("#new").toggle(); $("#index").toggle(); return false;'>New proposal</button>
+  <table>
     <% @docs.each do |doc| %>
       <tr id='doc_<%= doc.id %>'>
         <td><a href='#' onclick='return load_doc(<%= doc.id %>)'><%= doc.filename %></a></td>
-        <td><a href='#' onclick='return delete_doc(<%= doc.id %>,confirm("You sure?"));'>del</a></td>
+        <td><button onclick='return delete_doc(<%= doc.id %>,confirm("You sure?"));'>del</button></td>
       </tr>
     <% end %>
   </table>
 </div>
 
 <div id='new' style='display:none'>
-  <a href='#' onclick='$("#new").toggle(); $("#index").toggle(); return false;'><< back</a><br/>
+  <button onclick='$("#new").toggle(); $("#index").toggle(); return false;'><< back</button><br/>
   <form method="POST" action='/'>
     <div id='setup' style='display:block'>
       <p class="edgeToEdge formButtons">
