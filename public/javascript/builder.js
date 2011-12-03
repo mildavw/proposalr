@@ -171,6 +171,26 @@ function update_content_preview(new_content) {
   }
 }
 
+function load_saved(doc) {
+  console.info(doc); return;
+  update_content_preview(content);
+  var i, content_index;
+  for (i in doc) {
+    content_index = i.match(/^output_(\d+)(_meta)?$/);
+    console.info(i, content_index);
+    if (content_index && content_index[1] && content_index[2] === undefined) {
+      // populate content fields with content data while ignoring meta fields
+      $('textarea[name=output_'+content_index[1]+']').html(doc[i]);
+    } else {
+      // populate details fields with details data
+      console.info($(i).get(0).tagName);
+      // switch ($(i).get(0).tagName) {
+      //   case 'TEXTAREA': break;
+      // }
+    }
+  }
+}
+
 function preview() {
   pre_preview();
   var substitutions = build_substitution_hash();
