@@ -45,7 +45,7 @@ function checkbox_group(prefix, label, attributes, group){
   var ilen = group.length;
   for (var i = 0; i < ilen; i++) {
     var item = group[i];
-    var nickname = item.rename || underscore(item.label);
+    var nickname = item.rename || underscore(item.label).toLowerCase();
     html += checkbox_group_item(nickname, item.label, prefix, item.attributes);
   }
   html += '</dd>';
@@ -70,7 +70,7 @@ function build_form() {
     var jlen = inputs.length;
     for (var j = 0; j < jlen; j++) {
       input = inputs[j];
-      var nickname = (input.rename || underscore(input.label));
+      var nickname = (input.rename || underscore(input.label).toLowerCase());
       switch(input.type) {
         case 'date':
           html += date_field(nickname, input.label, input.attributes);

@@ -11,5 +11,5 @@ function date_for_display(date) {
 }
 
 function underscore(str) {
-  return str.replace(/\s+/g,'_').toLowerCase();
+  return str.replace(/\s+/g,'_');
 }
