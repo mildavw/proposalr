@@ -1,7 +1,7 @@
 content = [];
 
 var text = '<img src="/images/EJP Events Logo.png"/>';
-content.push({title:'top_image', hide_preview:true, attributes:{hide_title:true}, text:text});
+content.push({title:'top_image', attributes:{hide_title:true}, text:text});
 
 content.push({title:'contract_date', style:'text-align:right', attributes:{hide_title:true}, text:'«contract_date»'});
 

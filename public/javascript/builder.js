@@ -143,9 +143,7 @@ function update_content_preview(new_content) {
   if ($('#preview dt').length > 0) {
     var ilen = new_content.length;
     for (var i=0;i<ilen;i++) {
-      if (!new_content[i].hide_preview) {
-        $('#output_'+i).html( new_content[i].text );
-      }
+      $('#output_'+i).html( new_content[i].text );
     }
   } else {
     var meta = [];
