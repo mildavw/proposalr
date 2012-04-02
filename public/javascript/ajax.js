@@ -41,6 +41,7 @@ function save_all() {
 }
 
 function email_pdf() {
+  preview();
   var email_to = prompt('Send PDF to the following address:', default_email());
   if ($('#email_to').length > 0) {
     $('#email_to').val(escape(email_to));
@@ -50,6 +51,20 @@ function email_pdf() {
   }
   ajax_submit('email');
   return false;
+}
+
+function preview_as_html() {
+  preview();
+  $('form').attr('target','_blank');
+  $('form').attr('action', filename('html'));
+  return true;
+}
+
+function download_pdf() {
+  preview();
+  $('form').removeAttr('target');
+  $('form').attr('action', filename('pdf'));
+  return true;
 }
 
 function ajax_submit(path) {
@@ -64,29 +79,4 @@ function ajax_submit(path) {
 
   // Set another completion function for the request above
   jqxhr.complete(function(){ alert("second complete"); });
-}
-
-function edit_details() {
-  $("#preview").hide();
-  $("#setup").show();
-  return false;
-}
-
-function preview_as_html() {
-  $('form').attr('target','_blank');
-  $('form').attr('action', filename('html'));
-  return true;
-}
-
-function download_pdf() {
-  $('form').removeAttr('target');
-  $('form').attr('action', filename('pdf'));
-  return true;
-}
-
-function review_content() {
-  preview();
-  $("#setup").hide();
-  $("#preview").show();
-  return false;
 }

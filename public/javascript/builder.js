@@ -87,7 +87,7 @@ function build_form() {
     }
     html += '</dl></fieldset>';
   }
-  $('#setup p').before(html);
+  $('#setup p:first').before(html);
 }
 
 function hash_add(hash, elements) {
@@ -167,7 +167,7 @@ function update_content_preview(new_content) {
     for (var k in meta){
       insert += '<input type="hidden" name="output_'+k+'_meta" value="'+escape($.toJSON(meta[k]))+'"/>';
     }
-    $('#preview p').eq(0).before(insert);
+    $('#preview').html(insert);
   }
 }
 
