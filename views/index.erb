@@ -16,8 +16,8 @@
   <table>
     <% @docs.each do |doc| %>
       <tr id='doc_<%= doc.id %>'>
-        <td><a href='#' onclick='return load_doc(<%= doc.id %>)'><%= doc.filename %></a></td>
-        <td><button onclick='return delete_doc(<%= doc.id %>);'>del</button></td>
+        <td><a href='#' onclick='return app.load_doc(<%= doc.id %>)'><%= doc.filename %></a></td>
+        <td><button onclick='return app.delete_doc(<%= doc.id %>);'>del</button></td>
       </tr>
     <% end %>
   </table>
@@ -29,18 +29,18 @@
     <div id='setup' style='display:block'>
       <p class="edgeToEdge formButtons">
         <!-- <button onclick="fill_in_sample_data());">Sample</button> -->
-        <button onclick="return preview_as_html()">Preview</button>
-        <button onclick="return download_pdf()">Download PDF</button>
-        <button onclick="return email_pdf()">Email PDF</button><br/><br/>
-        <button onclick='return save_all()'>Save</button><br/><br/>
+        <button onclick="return app.preview_as_html()">Preview</button>
+        <button onclick="return app.download_pdf()">Download PDF</button>
+        <button onclick="return app.email_pdf()">Email PDF</button><br/><br/>
+        <button onclick='return app.save_all()'>Save</button><br/><br/>
       </p>
-      <p id="message" class="edgeToEdge" style='text-align:right;'></p>
     </div>
   </form>
   <form id="preview_form" method="POST" action='/'>
     <div id="preview" style="display:none;"></div>
   </form>
 </div>
+<p id="message" class="edgeToEdge" style='text-align:center;'></p>
 
 <div class="footer">
   Proposalr &copy; EJP Events, 2012
