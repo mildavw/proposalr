@@ -25,7 +25,7 @@
 
 <div id='new' style='display:none'>
   <button onclick='$("#new").toggle(); $("#index").toggle(); return false;'><< back</button><br/>
-  <form method="POST" action='/'>
+  <form id="detail_form" method="POST" action='/'>
     <div id='setup' style='display:block'>
       <p class="edgeToEdge formButtons">
         <!-- <button onclick="fill_in_sample_data());">Sample</button> -->
@@ -36,6 +36,8 @@
       </p>
       <p id="message" class="edgeToEdge" style='text-align:right;'></p>
     </div>
+  </form>
+  <form id="preview_form" method="POST" action='/'>
     <div id="preview" style="display:none;"></div>
   </form>
 </div>

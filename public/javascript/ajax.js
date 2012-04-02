@@ -36,7 +36,7 @@ function delete_doc(id) {
 }
 
 function save_all() {
-  ajax_submit('save');
+  ajax_submit('save','#details_form');
   return false;
 }
 
@@ -49,32 +49,37 @@ function email_pdf() {
     var html = '<input type="hidden" name="email_to" id="email_to" value="'+escape(email_to)+'"/>';
     $('#preview p').eq(0).before(html);
   }
-  ajax_submit('email');
+  ajax_submit('email','#preview_form');
   return false;
 }
 
 function preview_as_html() {
   preview();
-  $('form').attr('target','_blank');
-  $('form').attr('action', filename('html'));
-  return true;
+  $('#preview_form').attr('target','_blank');
+  $('#preview_form').attr('action', filename('html'));
+  $('#preview_form').submit();
+  return false;
 }
 
 function download_pdf() {
   preview();
-  $('form').removeAttr('target');
-  $('form').attr('action', filename('pdf'));
-  return true;
+  $('#preview_form').removeAttr('target');
+  $('#preview_form').attr('action', filename('pdf'));
+  $('#preview_form').submit();
+  return false;
 }
 
-function ajax_submit(path) {
+function ajax_submit(path, form) {
   var jqxhr = $.post(path+'/'+filename(''),
-        $("form").serialize(),
-        function() {alert("success");}
+        $(form).serialize(),
+        function() { // alert("success");
+        }
       )
-      .success(function() { alert("second success"); })
+      .success(function() { //alert("second success");
+      })
       .error(function() { alert("error"); })
-      .complete(function() { alert("complete"); });
+      .complete(function() { //alert("complete");
+       });
   // perform other work here ...
 
   // Set another completion function for the request above
