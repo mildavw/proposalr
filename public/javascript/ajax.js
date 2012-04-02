@@ -19,9 +19,9 @@ function hide_message() {
 }
 
 function load_doc(id) {
-  if (confirm("You sure? This will erase unsaved changes.")) {
+  if (confirm("You sure? This will erase unsaved changes in the current document.")) {
     var result = $.getJSON('/'+id)
-    .success(function(json_data) {load_saved( $.parseJSON(json_data));})
+    .success(function(json) {load_saved(json);})
     .error(function() {alert("Error: document not loaded.");});
   }
   return false;
@@ -36,7 +36,7 @@ function delete_doc(id) {
 }
 
 function save_all() {
-  ajax_submit('save','#details_form');
+  ajax_submit('save','#detail_form');
   return false;
 }
 
