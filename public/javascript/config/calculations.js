@@ -7,6 +7,7 @@ $(function(){
 });
 
 (function(){
+
   config.default_email = 'emee@ejpevents.com';
 
   config.filename = function(ext) {
@@ -29,7 +30,7 @@ $(function(){
   };
 
   config.today = function() { // can spy on this
-    return new Date(); 
+    return new Date();
   };
 
   config.calc_payment_dates = function(n) {
@@ -64,7 +65,7 @@ $(function(){
   };
 
   config.round_date = function(date) {
-    // rounds date to closest of 
+    // rounds date to closest of
     // a) 1st of this month, b) 15th of this month, c) 1st of next month
     var m = date.getMonth();
     var y = date.getFullYear();
@@ -80,7 +81,7 @@ $(function(){
     if (mon == 11) return {month:0,year:yr+1};
     return {month:mon+1,year:yr};
   };
-  
+
   insert_today = function() {
     var today = date_for_display(new Date());
     $('#contract_date').val(today);
@@ -104,5 +105,5 @@ $(function(){
       calc_payment_dates(n);
     }
   };
-  
+
 })();
