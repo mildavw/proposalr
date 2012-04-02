@@ -16,8 +16,8 @@ function filename(ext) {
     $('#groom_last').val(),
     underscore($('#wedding_date').val())
   ].join('-');
-  if (event_id == '--') event_id = 'untitled';
-  if (ext == '') return event_id;
+  if (event_id === '--') event_id = 'untitled';
+  if (ext === '') return event_id;
   return event_id + '.' + ext;
 }
 
@@ -65,9 +65,10 @@ function calc_payment_dates(n) {
     var start = today();
     var end = parse_date(wedding_date);
     var results = n_payment_dates(start, end, n-1);
-    for (var i=n-1;i>-1;i--)
-    if (end - results[i] < 14 * 24 * 60 * 60 * 1000) {
-      results[i] = '14 days prior to the event';
+    for (var i=n-1;i>-1;i--) {
+      if (end - results[i] < 14 * 24 * 60 * 60 * 1000) {
+        results[i] = '14 days prior to the event';
+      }
     }
     set_payment_dates(results);
   }
