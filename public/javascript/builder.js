@@ -61,12 +61,12 @@ function textarea(nickname, label, attributes, text) {
 
 function build_form() {
   var html = '';
-  var ilen = fields.length;
+  var ilen = config.fields.length;
   for (var i = 0; i < ilen; i++) {
     html += '<fieldset class="edgeToEdge">';
-    html += '<legend>'+fields[i].label+'</legend>';
+    html += '<legend>'+config.fields[i].label+'</legend>';
     html += '<dl class="edgeToEdge formFields" style="display:none;">';
-    var inputs = fields[i].inputs;
+    var inputs = config.fields[i].inputs;
     var jlen = inputs.length;
     for (var j = 0; j < jlen; j++) {
       input = inputs[j];
@@ -127,7 +127,7 @@ function build_substitution_hash() {
 }
 
 function make_substitutions_in_content(substitutions) {
-  var new_content = jQuery.extend([], content);
+  var new_content = jQuery.extend([], config.template);
   for (var j in substitutions) {
     var reg = new RegExp('«'+j.replace(/^in_/,'')+'»', 'gim');
     if (substitutions[j] !== '') {
@@ -170,7 +170,7 @@ function update_content_preview(new_content) {
 }
 
 function load_saved(doc) {
-  update_content_preview(content);
+  update_content_preview(config.template);
   var i, content_index;
   for (i in doc) {
     content_index = i.match(/^output_(\d+)(_meta)?$/);

@@ -42,7 +42,7 @@ function save_all() {
 
 function email_pdf() {
   preview();
-  var email_to = prompt('Send PDF to the following address:', default_email());
+  var email_to = prompt('Send PDF to the following address:', config.default_email);
   if ($('#email_to').length > 0) {
     $('#email_to').val(escape(email_to));
   } else {

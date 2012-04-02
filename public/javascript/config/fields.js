@@ -1,6 +1,6 @@
-fields = [];
+config.fields = [];
 
-fields.push({label:'Contact',  inputs:[
+config.fields.push({label:'Contact',  inputs:[
   {label: 'Bride First'},
   {label: 'Bride Last'},
   {label: 'Groom First'},
@@ -14,14 +14,14 @@ fields.push({label:'Contact',  inputs:[
   {label: 'Email'}
 ]});
 
-fields.push({label:'Wedding',  inputs:[
+config.fields.push({label:'Wedding',  inputs:[
   {label: 'Date', type:'date', rename:'wedding_date'},
   {label: 'Location'},
   {label: 'Number Guests', attributes: {pattern:'[0-9]*'}},
   {label: 'Number Locations', attributes: {pattern:'[0-9]*'}}
 ]});
 
-fields.push({label:'Services',  inputs:[
+config.fields.push({label:'Services',  inputs:[
   {label: 'Date of Contract', type:'date', rename:'contract_date'},
   {label: '# of Consultations', rename:'num_consultations', attributes: {pattern:'[0-9]*'}},
   {label: '# of Sites', rename:'num_sites', attributes: {pattern:'[0-9]*'}},
@@ -60,7 +60,7 @@ fields.push({label:'Services',  inputs:[
   }
 ]});
 
-fields.push({label:'Fees',  inputs:[
+config.fields.push({label:'Fees',  inputs:[
   {label: 'Flat Fee', attributes: {pattern:'[0-9]*'}},
   {label: 'Option Date', type: 'date'},
   {label: 'Payment Amount'},
