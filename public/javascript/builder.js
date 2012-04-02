@@ -55,7 +55,7 @@ function textarea(nickname, label, attributes, text) {
   var defaults = {rows:'10',cols:'60'};
   var attrs = attributes_to_s( attributes, defaults );
   var html = '<dt><label for="'+nickname+'">'+label+'</label></dt>';
-  html += '<dd><textarea name="'+nickname+'"'+attrs+'>'+text+'</textarea></dd>';
+  html += '<dd><textarea name="'+nickname+'" id="'+nickname+'" '+attrs+'>'+text+'</textarea></dd>';
   return html;
 }
 
@@ -170,23 +170,27 @@ function update_content_preview(new_content) {
 }
 
 function load_saved(doc) {
-  console.info(doc); return;
   update_content_preview(content);
   var i, content_index;
   for (i in doc) {
     content_index = i.match(/^output_(\d+)(_meta)?$/);
-    console.info(i, content_index);
     if (content_index && content_index[1] && content_index[2] === undefined) {
       // populate content fields with content data while ignoring meta fields
       $('textarea[name=output_'+content_index[1]+']').html(doc[i]);
     } else {
       // populate details fields with details data
-      console.info($(i).get(0).tagName);
-      // switch ($(i).get(0).tagName) {
-      //   case 'TEXTAREA': break;
-      // }
+      console.info(i);
+      switch ( $('#'+i).get(0).tagName ) {
+        case 'TEXTAREA':
+          $('#'+i).html(doc[i]);
+          break;
+        case 'INPUT':
+          $('#'+i).val(doc[i]);
+          break;
+      }
     }
   }
+  $("#new").toggle(); $("#index").toggle();
 }
 
 function preview() {
