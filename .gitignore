@@ -2,3 +2,4 @@
 pdf/
 *.sqlite3
 local_email_settings.rb
+basic_auth_credentials.rb
