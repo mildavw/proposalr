@@ -1,0 +1,26 @@
+= Proposalr
+
+Proposalr is a web app targeted at a single user: my wife. She is a wedding coordinator whose sales cycle starts with a meeting followed by a proposal/contract. The problem this app solves is that her turn-around time on the proposal was lagging due to the fact that she also takes care of our two kids all day. This app allows her to create and send proposals on her phone while, say, standing at the park while the kids play, or sitting in the car while they nap. Proposalr also works in non-ios browsers in case she has a few minutes to sit down with her laptop.
+
+The app is configured to specifically create my wife's proposal/contract, but it could be configured produce any other simple document. The document template and fields input form in are specified in public/javascript/config/
+
+It is a Sinatra app running on Heroku. Her live version contains saved proposals. A demo version with fake data is here:
+
+http://proposalr_demo.heroku.com
+
+
+
+== Contributing to Proposalr
+ 
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
+* Fork the project.
+* Start a feature/bugfix branch.
+* Commit and push until you are happy with your contribution.
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+== Copyright
+
+Copyright (c) 2012 Dave Miller. See LICENSE.txt for
+further details.
