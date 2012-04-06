@@ -74,7 +74,7 @@ end
 post '/email/:filename' do |filename|
   filename ||= 'untitled'
   filename << '.pdf'
-  html = build_html(params)
+  html = build_html(params, filename)
   html = html.gsub(/src=\"\/images\//, 'src="file://'+`pwd`+'/public/images/')
   kit = PDFKit.new html
   begin
@@ -105,7 +105,7 @@ end
 private
 
 def output(filename, format, params)
-  html = build_html(params)
+  html = build_html(params, filename)
   case format
   when 'pdf'
     html = html.gsub(/src=\"\/images\//, 'src="file://'+`pwd`+'/public/images/')
@@ -123,7 +123,7 @@ def pdf_out_memory(html, filename)
   kit.to_pdf
 end
 
-def build_html(params)
+def build_html(params, filename)
   sections = {}
   params.each do |name, value|
     next unless name.match /^output/
@@ -139,7 +139,10 @@ def build_html(params)
 
     sections[meta['sort'].to_i] = "<p%s>%s%s</p>" % [style, heading, content]
   end
-  '<html><body style="font-family:times"><div>' + sections.sort.map {|k,v| v}.join('</div><div>') + '</div></body></html>'
+  head = '<head><title>%s</title></head>' % filename
+  '<html>%s<body style="font-family:times"><div>%s</div></body></html>' % [
+    head,
+    sections.sort.map {|k,v| v}.join('</div><div>')]
 end
 
 def show_hash(hash)
