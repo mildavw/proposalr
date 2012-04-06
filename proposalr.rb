@@ -11,19 +11,20 @@ require 'dm-timestamps'
 
 require './basic_auth_credentials'
 use Rack::Auth::Basic, "Restricted Area" do |username, password|
-  [username, password] == [settings.username,settings.password]
+  [username, password] == [settings.username, settings.password]
 end
-
-set :email_username, ENV['SENDGRID_USERNAME']
-set :email_password, ENV['SENDGRID_PASSWORD']
-set :email_service, ENV['EMAIL_SERVICE']
-set :email_domain, ENV['SENDGRID_DOMAIN']
 
 if settings.environment == :development
   require './local_email_settings'
+else
+  set :email_username, ENV['SENDGRID_USERNAME']
+  set :email_password, ENV['SENDGRID_PASSWORD']
+  set :email_service, ENV['EMAIL_SERVICE']
+  set :email_domain, ENV['SENDGRID_DOMAIN']
 end
 
-DataMapper.setup(:default, (ENV["DATABASE_URL"] || "sqlite3:///#{Dir.pwd}/development.sqlite3"))
+database_path = ENV["DATABASE_URL"] || ("sqlite3:///#{Dir.pwd}/%s.sqlite3" % settings.environment.to_s)
+DataMapper.setup(:default, database_path)
 
 class Document
   include DataMapper::Resource
