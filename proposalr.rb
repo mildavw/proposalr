@@ -9,9 +9,11 @@ require 'data_mapper'
 require 'dm-timestamps'
 # require 'ruby-debug'
 
-require './basic_auth_credentials'
+require './basic_auth_credentials' unless settings.environment == :production
 use Rack::Auth::Basic, "Restricted Area" do |username, password|
-  [username, password] == [settings.username, settings.password]
+  [username, password] == [
+      ENV['USERNAME'] || settings.username,
+      ENV['PASSWORD'] || settings.password]
 end
 
 if settings.environment == :development
