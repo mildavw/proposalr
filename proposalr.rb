@@ -9,7 +9,10 @@ require 'data_mapper'
 require 'dm-timestamps'
 # require 'ruby-debug'
 
+# remove the env condition if your prod environment has the file
+# Heroku deployment doesn't facilitate secret config files like this.
 require './basic_auth_credentials' unless settings.environment == :production
+
 use Rack::Auth::Basic, "Restricted Area" do |username, password|
   [username, password] == [
       ENV['USERNAME'] || settings.username,
