@@ -12,26 +12,30 @@
 <body>
 
 <div id='index' style='display:block'>
-  <button onclick='$("#new").toggle(); $("#index").toggle(); return false;'>New proposal</button>
+  <button onclick='$("#new").toggle(); $("#index").toggle(); return false;'>
+    New Proposal</button>
   <table>
     <% @docs.each do |doc| %>
       <tr id='doc_<%= doc.id %>'>
-        <td><a href='#' onclick='return app.load_doc(<%= doc.id %>)'><%= doc.filename %></a></td>
-        <td><button onclick='return app.delete_doc(<%= doc.id %>);'>del</button></td>
+        <td><a href='#' onclick='return app.load_doc(<%= doc.id %>)'>
+          <%= doc.filename %></a></td>
+        <td><button onclick='return app.delete_doc(<%= doc.id %>);'>Delete</button></td>
       </tr>
     <% end %>
   </table>
 </div>
 
 <div id='new' style='display:none'>
-  <button onclick='$("#new").toggle(); $("#index").toggle(); return false;'><< back</button><br/>
   <form id="detail_form" method="POST" action='/'>
     <div id='setup' style='display:block'>
       <p class="edgeToEdge formButtons">
         <!-- <button onclick="fill_in_sample_data());">Sample</button> -->
         <button onclick="return app.preview_as_html()">Preview</button>
-        <button onclick="return app.download_pdf()">Download PDF</button>
+        <button onclick="return app.download_pdf()">View PDF</button>
         <button onclick="return app.email_pdf()">Email PDF</button><br/><br/>
+        <button onclick='$("#new").toggle();$("#index").toggle();return false;'>
+          Saved Proposals
+        </button>
         <button onclick='return app.save_all()'>Save</button><br/><br/>
       </p>
     </div>

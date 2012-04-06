@@ -1,5 +1,5 @@
 $(function(){
-  $('#option_date').parent().append('<button onclick="calc_option_date();return false;">Calculate</button>');
+  $('#option_date').parent().append('<button onclick="calc_option_date();return false;">2 Weeks</button>');
   $('#payment_amount').parent().append('<br/><button onclick="calc_payments(2);return false;">Calculate 2</button>');
   $('#payment_amount').parent().append('<button onclick="calc_payments(4);return false;">Calculate 4</button>');
   $('#contract_date').parent().append('<button onclick="insert_today();return false;">Today</button>');
