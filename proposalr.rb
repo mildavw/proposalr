@@ -43,7 +43,7 @@ DataMapper.auto_upgrade!
 
 # docs index
 get '/' do
-  @docs = Document.all
+  @docs = Document.all(:order => [ :updated_at.desc ])
   erb :index
 end
 
