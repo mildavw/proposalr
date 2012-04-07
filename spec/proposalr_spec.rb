@@ -51,6 +51,28 @@ describe 'Proposalr' do
       last_response.body.should =~ /Bar/
     end
 
+    describe '#save' do
+      it 'returns a 500 with error messages if invalid' do
+        doc = Document.create!(:filename => 'Foo', :serialized_data => '')
+        response = auth_post('/save', {:filename => 'Foo'})
+        response.status.should == 500
+        response.body.should =~ /Serialized data must not be blank/
+      end
+      it 'updates a document when it has an id' do
+        doc = Document.create!(:filename => 'Foo', :serialized_data => '')
+        response = auth_post('/save', { :filename => 'Bar',
+                                        :document_id => doc.id.to_s,
+                                        :key => 'val' })
+        Document.get(doc.id).filename.should == 'Bar'
+        response.status.should == 200
+      end
+      it "creates a new document when it doesn't have an id" do
+        response = auth_post('/save', {:filename => 'Bar', :key => 'val'})
+        Document.first.filename.should == 'Bar'
+        response.status.should == 200
+      end
+    end
+
     it "deletes a document" do
       Document.create!(:filename => 'Foo', :serialized_data => '')
       target = Document.create!(:filename => 'Bar', :serialized_data => '')
@@ -66,14 +88,14 @@ describe 'Proposalr' do
     end
 
     it "returns a pdf version of the document for download" do
-      auth_post('/Bar.pdf', {})
+      auth_post('/pdf', {:filename => 'Bar'})
       last_response.header["Content-Type"].should == "application/pdf"
       last_response.header["Content-Disposition"].should == "attachment; filename=Bar.pdf"
       last_response.body.should =~ /\A\%PDF/
     end
 
     it "returns an HTML version of the document" do
-      auth_post('/Bar.html', {})
+      auth_post('/html', {:filename => 'Bar'})
       last_response.body.should =~ /\A<html>/
     end
 

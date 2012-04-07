@@ -61,21 +61,23 @@ get %r{(\d+)} do |id|
 end
 
 # download/show a doc in specified format
-post '/:filename.:format' do |filename, format|
-  filename ||= 'untitled'
+post %r{^/(pdf|html)$} do |format|
+  filename = params.delete('filename')
   output(filename, format, params)
 end
 
 # save a doc
-post '/save/:filename' do |filename|
-  params.delete('filename')
-  document = Document.new(:filename => filename, :serialized_data => params.to_json)
-  document.errors.join('<br/') if !document.save
+post '/save' do
+  id = params.delete('document_id')
+  doc = Document.first_or_new :id => (id.blank? ? nil : id)
+  doc.filename = params.delete('filename')
+  doc.serialized_data = params.empty? ? nil : params.to_json
+  doc.save ? [200, doc.id.to_s] : [500, doc.errors.values.join('<br/>')]
 end
 
 #email a pdf
-post '/email/:filename' do |filename|
-  filename ||= 'untitled'
+post '/email' do
+  filename = params.delete('filename')
   filename << '.pdf'
   html = build_html(params, filename)
   html = html.gsub(/src=\"\/images\//, 'src="file://'+`pwd`+'/public/images/')

@@ -4,7 +4,7 @@ $(function(){
 
 (function() {
 
-  app.load_saved = function(doc) {
+  app.load_saved = function(id, doc) {
     update_content_preview(config.template);
     var i, content_index;
     for (i in doc) {
@@ -24,11 +24,23 @@ $(function(){
         }
       }
     }
+    $('#document_id').val(id);
+    $('input[name=filename]').val(config.filename);
     $("#new").toggle(); $("#index").toggle();
   };
 
-  app.preview = function () {
+  app.new_doc = function() {
+    $("form").each(function(_,f){f.reset();});
+    $("#document_id").val('');
+    $('input[name=filename]').val('');
+    $("#new").toggle();
+    $("#index").toggle();
+    return false;
+  };
+
+  app.preview = function() {
     config.pre_preview();
+    $('input[name=filename]').val(config.filename);
     var substitutions = build_substitution_hash();
     var new_content = make_substitutions_in_content(substitutions);
     update_content_preview(new_content);

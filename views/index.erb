@@ -12,14 +12,15 @@
 <body>
 
 <div id='index' style='display:block'>
-  <button onclick='$("#new").toggle(); $("#index").toggle(); return false;'>
-    New Proposal</button>
+  <button onclick='return app.new_doc();'>
+    New Document</button>
   <table>
     <% @docs.each do |doc| %>
       <tr id='doc_<%= doc.id %>'>
         <td><a href='#' onclick='return app.load_doc(<%= doc.id %>)'>
           <%= doc.filename %></a></td>
-        <td><button onclick='return app.delete_doc(<%= doc.id %>);'>Delete</button></td>
+        <td><button
+            onclick='return app.delete_doc(<%= doc.id %>);'>Delete</button></td>
       </tr>
     <% end %>
   </table>
@@ -27,20 +28,23 @@
 
 <div id='new' style='display:none'>
   <form id="detail_form" method="POST" action='/'>
+    <input id="document_id" type="hidden" name="document_id"/>
+    <input type="hidden" name="filename"/>
     <div id='setup' style='display:block'>
       <p class="edgeToEdge formButtons">
         <!-- <button onclick="fill_in_sample_data());">Sample</button> -->
-        <button onclick="return app.preview_as_html()">Preview</button>
-        <button onclick="return app.download_pdf()">View PDF</button>
-        <button onclick="return app.email_pdf()">Email PDF</button><br/><br/>
-        <button onclick='$("#new").toggle();$("#index").toggle();return false;'>
-          Saved Proposals
+        <button onclick='return app.preview_as_html()'>Preview</button>
+        <button onclick='return app.download_pdf()'>View PDF</button>
+        <button onclick='return app.email_pdf()'>Email PDF</button><br/><br/>
+        <button onclick='return app.view_index()'>
+          Saved Documents
         </button>
-        <button onclick='return app.save_all()'>Save</button><br/><br/>
+        <button onclick='return app.save_doc()'>Save</button><br/><br/>
       </p>
     </div>
   </form>
   <form id="preview_form" method="POST" action='/'>
+    <input type="hidden" name="filename" value=""/>
     <div id="preview" style="display:none;"></div>
   </form>
 </div>

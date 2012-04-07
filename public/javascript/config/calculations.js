@@ -10,15 +10,14 @@ $(function(){
 
   config.default_email = 'emee@ejpevents.com';
 
-  config.filename = function(ext) {
-    var event_id = [
+  config.filename = function() {
+    var filename = [
       $('#bride_last').val(),
       $('#groom_last').val(),
       underscore($('#wedding_date').val())
     ].join('-');
-    if (event_id === '--') event_id = 'untitled';
-    if (ext === '') return event_id;
-    return event_id + '.' + ext;
+    if (filename === '--') filename = 'Untitled';
+    return filename;
   };
 
   config.pre_preview = function() {

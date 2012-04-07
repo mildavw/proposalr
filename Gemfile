@@ -10,8 +10,11 @@ group :production do
   gem 'dm-postgres-adapter'
 end
 
-group :development do
+group :development, :test do
   gem 'heroku'
   gem 'shotgun'
   gem 'dm-sqlite-adapter'
+  gem 'ruby-debug19'
+  gem 'capybara'
+  gem 'rspec'
 end
