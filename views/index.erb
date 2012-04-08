@@ -60,13 +60,13 @@
 <script src="javascript/utilities.js"></script>
 <script src="javascript/config/template.js"></script>
 <script src="javascript/config/fields.js"></script>
-<script src="javascript/ajax.js"></script>
 <script src="javascript/builder.js"></script>
+<script type="text/javascript">$(function(){app.build_form();});</script>
+<script src="javascript/ajax.js"></script>
 <script src="javascript/config/calculations.js"></script>
 <script type="text/javascript">
   var os_script = (navigator.userAgent.match(/iPhone|iPad/i)) ? 'ios' : 'non-ios';
   document.write('<script src="javascript/'+os_script+'.js"><\/script>');
 </script>
-<script type="text/javascript">$(function(){app.build_form();});</script>
 </body>
 </html>
