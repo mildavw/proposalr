@@ -12,8 +12,9 @@
     if (app.last_saved !== $('#detail_form').serialize()) {
       if (confirm('Save current document?')) {app.save_doc();}
     }
-    $("#new").toggle();
-    $("#index").toggle();
+    window.location = '/';
+    // $("#new").toggle();
+    // $("#index").toggle();
     return false;
   };
 
