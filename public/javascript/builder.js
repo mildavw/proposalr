@@ -1,7 +1,3 @@
-$(function(){
-  app.build_form();
-});
-
 (function() {
 
   app.load_saved = function(id, doc) {
