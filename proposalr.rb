@@ -85,7 +85,7 @@ post '/email' do
   begin
     Pony.mail({
       :to => params[:email_to],
-      :from => 'no-reply@proposalr.heroku.com',
+      :from => 'no-reply@%s' % ENV['URL'],
       :subject => "Your Proposalr Document - %s" % filename,
       :attachments => {filename => kit.to_pdf},
       :body => 'Attached.',
