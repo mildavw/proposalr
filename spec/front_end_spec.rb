@@ -76,36 +76,41 @@ describe 'front end' do
   end
 
   describe 'Saved Proposals button' do
-    describe 'prompts for saving changes if the current proposal is unsaved' do
-      it 'and saves if accepted' do
+    describe 'does not prompt to save changes' do
+      it 'if the current proposal is new and as yet unmodified' do
         auth_visit '/'
         click_button 'New Document'
-        n = Document.count
         click_button 'Saved Documents'
-        page.driver.browser.switch_to.alert.accept
-        Document.count.should == n+1
         page.should have_css('div#index', :visible => true)
       end
-
-      it 'and does not save if canceled' do
+      it 'if the current proposal is already saved' do
         auth_visit '/'
         click_button 'New Document'
-        n = Document.count
+        click_button 'Save'
+        wait_until{ page.has_css?("#message", :text => "")}
         click_button 'Saved Documents'
+        page.should have_css('div#index', :visible => true)
+      end
+    end
+    describe 'prompts for saving changes if the current proposal is unsaved' do
+      before :each do
+        auth_visit '/'
+        click_button 'New Document'
+        page.execute_script("$('input[name=filename]').val('foo')")
+        @n = Document.count
+        click_button 'Saved Documents'
+      end
+      it 'and saves if accepted' do
+        page.driver.browser.switch_to.alert.accept
+        Document.count.should == @n+1
+        page.should have_css('div#index', :visible => true)
+      end
+      it 'and does not save if canceled' do
         page.driver.browser.switch_to.alert.dismiss
-        Document.count.should == n
+        Document.count.should == @n
         page.should have_css('div#index', :visible => true)
       end
     end
     
-    it 'shows the index page with no prompt if the current proposal is saved' do
-      auth_visit '/'
-      click_button 'New Document'
-      click_button 'Save'
-      wait_until{ page.has_css?("#message", :text => "")}
-      click_button 'Saved Documents'
-      page.should have_css('div#index', :visible => true)
-    end
-
   end
 end

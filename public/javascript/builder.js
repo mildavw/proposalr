@@ -29,6 +29,7 @@
     $("form").each(function(_,f){f.reset();});
     $("#document_id").val('');
     $('input[name=filename]').val('');
+    app.last_saved = $('#detail_form').serialize();
     $("#new").toggle();
     $("#index").toggle();
     return false;
