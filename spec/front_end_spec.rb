@@ -1,11 +1,4 @@
-ENV['RACK_ENV'] = 'test'
-
-require_relative '../proposalr.rb'
-require_relative '../basic_auth_credentials'
-require_relative '../local_email_settings'
-require 'capybara'
-require 'capybara/dsl'
-require 'capybara/rspec'
+require 'spec_helper'
 
 describe 'front end' do
   include Capybara::DSL
@@ -35,10 +28,11 @@ describe 'front end' do
   it 'Preview button shows the html preview in a new window' do
     auth_visit '/'
     click_button 'New Document'
+    page.execute_script("config.filename = function(){return 'Foo';}")
     click_button 'Preview'
     pdb = page.driver.browser
     pdb.switch_to.window(pdb.window_handles.last)
-    page.should have_xpath("//title", :text => "Untitled")
+    page.should have_xpath("//title", :text => "Foo")
   end
 
   it 'View PDF button downloads a PDF'
@@ -48,22 +42,19 @@ describe 'front end' do
   # end
 
   describe 'Email PDF button' do
-    it 'prompts for an address and sends the email with PDF attached' do
+    before :each do
       auth_visit '/'
       click_button 'New Document'
       click_button 'Email PDF'
+    end
+    it 'prompts for an address and sends the email with PDF attached' do
       page.driver.browser.switch_to.alert.accept
       page.should have_css("#message", :text => "Sending...")
     end
-
     it 'prompts for an address and does nothing if user cancels' do
-      auth_visit '/'
-      click_button 'New Document'
-      click_button 'Email PDF'
       page.driver.browser.switch_to.alert.dismiss
       page.should_not have_css("#message", :text => "Sending...")
     end
-
   end
 
   it 'Save button saves something' do
@@ -111,6 +102,6 @@ describe 'front end' do
         page.should have_css('div#index', :visible => true)
       end
     end
-    
+
   end
 end
