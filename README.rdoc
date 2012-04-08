@@ -4,7 +4,7 @@ Proposalr is a web app targeted at a single user, my wife. She is a wedding coor
 
 The app is configured to specifically create my wife's proposal/contract, but it could be configured produce any other simple document. The document template and input fields in are specified in public/javascript/config/
 
-It is a Sinatra app running on Heroku. Her live version contains saved proposals. A demo version is here:
+It is a Sinatra app running on Heroku. Her live version contains saved proposals. A demo version is here (u/p admin/admin):
 
 http://admin:admin@proposalr.heroku.com
 
