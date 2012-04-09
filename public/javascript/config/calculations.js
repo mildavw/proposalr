@@ -101,7 +101,7 @@ $(function(){
     } else {
       var payment = fee / n;
       $('#payment_amount').val(parseFloat(payment).toFixed(2));
-      calc_payment_dates(n);
+      config.calc_payment_dates(n);
     }
   };
 
