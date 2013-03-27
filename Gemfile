@@ -11,10 +11,11 @@ group :production do
 end
 
 group :development, :test do
+  gem 'shotgun'
   gem 'heroku'
   gem 'shotgun'
   gem 'dm-sqlite-adapter'
+  gem 'rspec'
   gem 'ruby-debug19'
   gem 'capybara'
-  gem 'rspec'
 end

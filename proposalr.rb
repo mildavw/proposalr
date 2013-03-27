@@ -11,7 +11,7 @@ require 'dm-timestamps'
 
 # remove the env condition if your prod environment has the file
 # Heroku deployment doesn't facilitate secret config files like this.
-require './basic_auth_credentials' unless settings.environment == :production
+require_relative './basic_auth_credentials' unless settings.environment == :production
 
 use Rack::Auth::Basic, "Restricted Area" do |username, password|
   [username, password] == [
