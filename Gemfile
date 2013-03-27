@@ -11,7 +11,9 @@ group :production do
 end
 
 group :development, :test do
+  gem 'jasmine'
   gem 'shotgun'
+  gem 'thin'
   gem 'heroku'
   gem 'shotgun'
   gem 'dm-sqlite-adapter'

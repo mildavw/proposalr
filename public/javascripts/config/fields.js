@@ -26,7 +26,7 @@ config.fields.push({label:'Services',  inputs:[
   {label: '# of Consultations', rename:'num_consultations', attributes: {pattern:'[0-9]*'}},
   {label: '# of Sites', rename:'num_sites', attributes: {pattern:'[0-9]*'}},
   {label: '# of Assistants', rename:'num_assistants', attributes: {pattern:'[0-9]*'}},
-  {label: 'Vendor Suggestions', type:'checkbox_group', group: [
+  {label: 'Vendor Suggestions', type:'checkbox_group', rename:'vendorsuggestions', group: [
     {label: 'Photographer'},
     {label: 'Videographer'},
     {label: 'Hair Stylist'},
@@ -47,7 +47,7 @@ config.fields.push({label:'Services',  inputs:[
   },
   {label: 'Elements', rename:'design_elements', type:'textarea', text:'Work with vendors and oversee the production of design elements, such as printed materials, attire elements, and décor details.'},
   {label: 'Avenues/Methods', rename:'avenues_methods', type:'textarea', text:"Suggest avenues and methods that will  create/emphasize/ensure INSERT CLIENT’S GOTTA-HAVES HERE."},
-  {label: 'Will Oversee', type:'checkbox_group', group: [
+  {label: 'Will Oversee', type:'checkbox_group', rename: 'willoversee', group: [
       {label: 'Tents'},
       {label: 'Lighting'},
       {label: 'Infrastructure'},
